@@ -423,6 +423,33 @@
             margin-bottom: 20px;
         }
 
+        .password-change-btn {
+            width: 100%;
+            background-color: #080e66;
+            color: #fff;
+            border: none;
+            padding: 14px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-family: 'Pretendard', sans-serif;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .password-change-btn:hover:not(:disabled) {
+            background-color: #060a4d;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(8, 14, 102, 0.3);
+        }
+
+        .password-change-btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
         .form-label {
             display: block;
             font-size: 13px;
@@ -857,8 +884,9 @@
                     <div class="error-message" id="passwordErrorMessage"></div>
                     <div class="success-message" id="passwordSuccessMessage"></div>
 
-                    <button type="submit" class="refresh-btn" id="passwordChangeBtn">
-                        비밀번호 변경
+                    <button type="submit" class="password-change-btn" id="passwordChangeBtn">
+                        <i class="fas fa-key"></i>
+                        <span>비밀번호 변경</span>
                     </button>
                 </form>
             </div>
@@ -1120,7 +1148,7 @@
             }
 
             changeBtn.disabled = true;
-            changeBtn.innerHTML = '<span class="loading"></span>변경 중...';
+            changeBtn.innerHTML = '<span class="loading"></span><span>변경 중...</span>';
 
             try {
                 const response = await fetch('/api/admin/change-password', {
@@ -1147,14 +1175,14 @@
                     errorMessage.textContent = result.error || '비밀번호 변경에 실패했습니다.';
                     errorMessage.style.display = 'block';
                     changeBtn.disabled = false;
-                    changeBtn.textContent = '비밀번호 변경';
+                    changeBtn.innerHTML = '<i class="fas fa-key"></i><span>비밀번호 변경</span>';
                 }
             } catch (error) {
                 console.error('Password change error:', error);
                 errorMessage.textContent = '비밀번호 변경 중 오류가 발생했습니다.';
                 errorMessage.style.display = 'block';
                 changeBtn.disabled = false;
-                changeBtn.textContent = '비밀번호 변경';
+                changeBtn.innerHTML = '<i class="fas fa-key"></i><span>비밀번호 변경</span>';
             }
         }
 
