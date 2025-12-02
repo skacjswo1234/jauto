@@ -24,17 +24,17 @@
         /* 모바일 메뉴 토글 버튼 */
         .mobile-menu-toggle {
             position: fixed;
-            top: 15px;
-            right: 15px;
+            top: 5px;
+            right: 5px;
             z-index: 1001;
             background-color: #080e66;
             color: #fff;
             border: none;
-            width: 48px;
-            height: 48px;
+            width: 40px;
+            height: 40px;
             border-radius: 8px;
             cursor: pointer;
-            font-size: 20px;
+            font-size: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -132,7 +132,7 @@
         .admin-main {
             width: 100%;
             padding: 10px 15px;
-            padding-top: 55px;
+            padding-top: 0;
         }
 
         .admin-header {
@@ -145,6 +145,13 @@
             display: flex;
             flex-direction: column;
             gap: 12px;
+        }
+
+        /* 모바일에서 헤더가 메뉴 버튼과 겹치지 않도록 */
+        @media (max-width: 768px) {
+            .admin-header {
+                margin-top: 50px;
+            }
         }
 
         .header-top {
@@ -514,7 +521,7 @@
 
             .admin-main {
                 margin-left: 280px;
-                padding: 20px 40px;
+                padding: 0 40px;
                 padding-top: 0;
             }
 
