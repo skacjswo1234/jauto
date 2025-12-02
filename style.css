@@ -49,21 +49,21 @@
 
 @font-face {
     font-family: 'GmarketSans';
-    src: url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansLight.woff2') format('woff2');
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket@1.0.0/GmarketSansLight.woff2') format('woff2');
     font-weight: 300;
     font-display: swap;
 }
 
 @font-face {
     font-family: 'GmarketSans';
-    src: url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansMedium.woff2') format('woff2');
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket@1.0.0/GmarketSansMedium.woff2') format('woff2');
     font-weight: 500;
     font-display: swap;
 }
 
 @font-face {
     font-family: 'GmarketSans';
-    src: url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansBold.woff2') format('woff2');
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket@1.0.0/GmarketSansBold.woff2') format('woff2');
     font-weight: 700;
     font-display: swap;
 }
