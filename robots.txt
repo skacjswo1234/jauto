@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /admin.html
+Disallow: /login.html
+Disallow: /functions/
+Disallow: /api/
+
+Sitemap: https://jautofin.com/sitemap.xml
+
