@@ -148,8 +148,6 @@ document.addEventListener('DOMContentLoaded', function() {
             // 보기 버튼 클릭 시에는 체크박스 토글하지 않음
             if (e.target.classList.contains('view-btn')) {
                 e.stopPropagation();
-                // 개인정보처리방침 보기 로직 (실제 구현 필요)
-                alert('개인정보처리방침을 확인합니다.');
                 return;
             }
             

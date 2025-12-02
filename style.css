@@ -173,6 +173,7 @@ body {
     font-weight: bold;
     color: #000000;
     margin-bottom: 8px;
+    text-align: center;
 }
 
 .main-headline .line2 {
@@ -180,7 +181,7 @@ body {
     font-size: 28px;
     font-weight: bold;
     color: #080e66;
-    text-align: left;
+    text-align: center;
     margin-left: 0;
     text-indent: 0;
 }
@@ -188,6 +189,7 @@ body {
 #page1 .main-headline .line1,
 #page1 .main-headline .line2 {
     font-size: 48px;
+    text-align: center;
 }
 
 /* 차량 이미지 컨테이너 */
