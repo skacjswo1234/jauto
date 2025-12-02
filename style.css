@@ -47,26 +47,7 @@
     font-display: swap;
 }
 
-@font-face {
-    font-family: 'GmarketSans';
-    src: url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket@1.0.0/GmarketSansLight.woff2') format('woff2');
-    font-weight: 300;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'GmarketSans';
-    src: url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket@1.0.0/GmarketSansMedium.woff2') format('woff2');
-    font-weight: 500;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'GmarketSans';
-    src: url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket@1.0.0/GmarketSansBold.woff2') format('woff2');
-    font-weight: 700;
-    font-display: swap;
-}
+/* Gmarket Sans 폰트 제거 - 404 에러 방지 */
 
 /* 전역 리셋 */
 ul, ol, li {
@@ -219,7 +200,7 @@ body {
     align-items: center;
     justify-content: center;
     gap: 8px;
-    font-family: 'GmarketSans', sans-serif;
+    font-family: 'Pretendard', sans-serif;
 }
 
 .clock-icon {
@@ -246,7 +227,7 @@ body {
     margin: 15px 0;
     width: 100%;
     text-align: center;
-    font-family: 'GmarketSans', sans-serif;
+    font-family: 'Pretendard', sans-serif;
 }
 
 .agree-wrap ul {
@@ -505,7 +486,7 @@ body {
     font-weight: bold;
     color: #000;
     margin-bottom: 20px;
-    font-family: 'GmarketSans', sans-serif;
+    font-family: 'Pretendard', sans-serif;
 }
 
 .option-buttons {
@@ -524,7 +505,7 @@ body {
     color: #000;
     cursor: pointer;
     transition: all 0.3s ease;
-    font-family: 'GmarketSans', sans-serif;
+    font-family: 'Pretendard', sans-serif;
     font-weight: 500;
 }
 
@@ -551,7 +532,7 @@ body {
     border-radius: 8px;
     font-size: 18px;
     color: #000;
-    font-family: 'GmarketSans', sans-serif;
+    font-family: 'Pretendard', sans-serif;
     transition: all 0.3s ease;
     box-sizing: border-box;
 }
@@ -577,7 +558,7 @@ body {
     font-weight: bold;
     cursor: pointer;
     transition: all 0.3s ease;
-    font-family: 'GmarketSans', sans-serif;
+    font-family: 'Pretendard', sans-serif;
 }
 
 .next-btn:hover {
@@ -614,14 +595,14 @@ body {
 .phone-prefix {
     font-size: 18px;
     color: #666666;
-    font-family: 'GmarketSans', sans-serif;
+    font-family: 'Pretendard', sans-serif;
     font-weight: 500;
 }
 
 .phone-separator {
     font-size: 18px;
     color: #666666;
-    font-family: 'GmarketSans', sans-serif;
+    font-family: 'Pretendard', sans-serif;
     margin: 0 4px;
 }
 
@@ -633,7 +614,7 @@ body {
     background: transparent;
     font-size: 18px;
     color: #000;
-    font-family: 'GmarketSans', sans-serif;
+    font-family: 'Pretendard', sans-serif;
     text-align: center;
     outline: none;
 }
@@ -916,7 +897,7 @@ body {
     font-weight: bold;
     color: #080e66;
     margin-bottom: 15px;
-    font-family: 'GmarketSans', sans-serif;
+    font-family: 'Pretendard', sans-serif;
 }
 
 .modal-message {
@@ -938,7 +919,7 @@ body {
     font-weight: bold;
     cursor: pointer;
     transition: all 0.3s ease;
-    font-family: 'GmarketSans', sans-serif;
+    font-family: 'Pretendard', sans-serif;
 }
 
 .modal-btn:hover {
