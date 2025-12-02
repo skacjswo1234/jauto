@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>J AUTO FINANCIAL - 장기렌트 최저가 비교</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@1.3.9/dist/web/static/pretendard.min.css" />
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 첫 번째 화면 (메인 화면) -->
+    <div class="container" id="page1">
+        <!-- 상단 배너 -->
+        <div class="banner">
+            허위견적시 200% 환불보장
+        </div>
+
+        <!-- 메인 헤드라인 -->
+        <h1 class="main-headline">
+            <span class="line1">국내 장기렌트 최저가를</span>
+            <span class="line2">한눈에 비교해드립니다.</span>
+        </h1>
+
+        <!-- GV80 이미지 -->
+        <div class="car-image-container">
+            <img src="images/gv80.png" alt="Genesis GV80" class="car-image">
+        </div>
+
+        <!-- 설문 참여 안내 -->
+        <div class="survey-info">
+            <i class="fa-regular fa-clock clock-icon"></i>
+            <span class="survey-text"><span class="survey-time">10초 설문 참여시</span> <strong>즉시 견적발송</strong></span>
+        </div>
+
+        <!-- 동의 체크박스 -->
+        <div class="agree-wrap">
+            <ul>
+                <li>
+                    <label class="consent-item">
+                        <input type="checkbox" class="visually-hidden" checked>
+                        <span class="checkmark"></span>
+                        <span class="consent-text">개인정보처리방침 동의</span>
+                        <button class="view-btn">보기</button>
+                    </label>
+                </li>
+                <li>
+                    <label class="consent-item">
+                        <input type="checkbox" class="visually-hidden" checked>
+                        <span class="checkmark"></span>
+                        <span class="consent-text">제 3자제공 및 활용 동의</span>
+                        <button class="view-btn">보기</button>
+                    </label>
+                </li>
+                <li>
+                    <label class="consent-item">
+                        <input type="checkbox" class="visually-hidden" checked>
+                        <span class="checkmark"></span>
+                        <span class="consent-text">마케팅수신 동의</span>
+                        <button class="view-btn">보기</button>
+                    </label>
+                </li>
+            </ul>
+        </div>
+
+        <!-- 설문 시작 버튼 -->
+        <button class="start-btn" onclick="startSurvey()">설문시작</button>
+
+        <!-- 하단 안내 -->
+        <p class="warning-text">타인 번호도용 · 장난 신청 시 IP 추적 및 법적 처벌 대상이 됩니다.</p>
+        
+        <!-- 회사 정보 -->
+        <div class="company-info">
+            <p>업체명 : J AUTO FINANCIAL</p>
+            <p>사업자번호 : 542-87-02110</p>
+        </div>
+    </div>
+
+    <!-- 두 번째 화면 (설문 화면) -->
+    <div class="container survey-page" id="page2" style="display: none;">
+        <!-- 상단 배너 -->
+        <div class="banner">
+            허위견적시 200% 환불보장
+        </div>
+
+        <!-- 메인 헤드라인 -->
+        <h1 class="main-headline">
+            <span class="line1">국내 장기렌트 최저가를</span>
+            <span class="line2">한눈에 비교해드립니다.</span>
+        </h1>
+
+        <!-- 경고 박스 -->
+        <div class="warning-box">
+            <i class="fa-solid fa-exclamation-circle warning-icon"></i>
+            <span>타인 번호도용·장난 신청 시 IP 추적 및 법적 처벌 대상이 됩니다.</span>
+        </div>
+
+        <!-- 진행상황 바 -->
+        <div class="progress-section">
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 20%;"></div>
+                <span class="progress-text">진행상황 20%</span>
+            </div>
+        </div>
+
+        <!-- 메인 콘텐츠 카드 -->
+        <div class="survey-card">
+            <div class="question-text">1.희망하는 이용방식을 입력해주세요</div>
+            <div class="option-buttons">
+                <button class="option-btn" onclick="selectOption('장기렌트')">장기렌트</button>
+                <button class="option-btn" onclick="selectOption('리스')">리스</button>
+            </div>
+        </div>
+
+        <!-- 회사 정보 -->
+        <div class="company-info">
+            <p>업체명 : J AUTO FINANCIAL</p>
+            <p>사업자번호 : 542-87-02110</p>
+        </div>
+    </div>
+
+    <!-- 세 번째 화면 (차량명 입력) -->
+    <div class="container survey-page" id="page3" style="display: none;">
+        <!-- 상단 배너 -->
+        <div class="banner">
+            허위견적시 200% 환불보장
+        </div>
+
+        <!-- 메인 헤드라인 -->
+        <h1 class="main-headline">
+            <span class="line1">국내 장기렌트 최저가를</span>
+            <span class="line2">한눈에 비교해드립니다.</span>
+        </h1>
+
+        <!-- 경고 박스 -->
+        <div class="warning-box">
+            <i class="fa-solid fa-exclamation-circle warning-icon"></i>
+            <span>타인 번호도용·장난 신청 시 IP 추적 및 법적 처벌 대상이 됩니다.</span>
+        </div>
+
+        <!-- 진행상황 바 -->
+        <div class="progress-section">
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 35%;"></div>
+                <span class="progress-text">진행상황 35%</span>
+            </div>
+        </div>
+
+        <!-- 메인 콘텐츠 카드 -->
+        <div class="survey-card">
+            <div class="question-text">2.원하는 차량명을 입력해주세요</div>
+            <div class="input-section">
+                <input type="text" class="car-input" placeholder="EX) 제네시스 G90" id="carNameInput">
+            </div>
+            <button class="next-btn" onclick="nextToStep3()">다음</button>
+        </div>
+
+        <!-- 회사 정보 -->
+        <div class="company-info">
+            <p>업체명 : J AUTO FINANCIAL</p>
+            <p>사업자번호 : 542-87-02110</p>
+        </div>
+    </div>
+
+    <!-- 네 번째 화면 (성함 입력) -->
+    <div class="container survey-page" id="page4" style="display: none;">
+        <!-- 상단 배너 -->
+        <div class="banner">
+            허위견적시 200% 환불보장
+        </div>
+
+        <!-- 메인 헤드라인 -->
+        <h1 class="main-headline">
+            <span class="line1">국내 장기렌트 최저가를</span>
+            <span class="line2">한눈에 비교해드립니다.</span>
+        </h1>
+
+        <!-- 경고 박스 -->
+        <div class="warning-box">
+            <i class="fa-solid fa-exclamation-circle warning-icon"></i>
+            <span>타인 번호도용·장난 신청 시 IP 추적 및 법적 처벌 대상이 됩니다.</span>
+        </div>
+
+        <!-- 진행상황 바 -->
+        <div class="progress-section">
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 50%;"></div>
+                <span class="progress-text">진행상황 50%</span>
+            </div>
+        </div>
+
+        <!-- 메인 콘텐츠 카드 -->
+        <div class="survey-card">
+            <div class="question-text">3. 성함을 입력해 주세요</div>
+            <div class="input-section">
+                <input type="text" class="car-input" placeholder="이름" id="userNameInput">
+            </div>
+            <button class="next-btn" onclick="nextToStep4()">다음</button>
+        </div>
+
+        <!-- 회사 정보 -->
+        <div class="company-info">
+            <p>업체명 : J AUTO FINANCIAL</p>
+            <p>사업자번호 : 542-87-02110</p>
+        </div>
+    </div>
+
+    <!-- 다섯 번째 화면 (연락처 입력) -->
+    <div class="container survey-page" id="page5" style="display: none;">
+        <!-- 상단 배너 -->
+        <div class="banner">
+            허위견적시 200% 환불보장
+        </div>
+
+        <!-- 메인 헤드라인 -->
+        <h1 class="main-headline">
+            <span class="line1">국내 장기렌트 최저가를</span>
+            <span class="line2">한눈에 비교해드립니다.</span>
+        </h1>
+
+        <!-- 경고 박스 -->
+        <div class="warning-box">
+            <i class="fa-solid fa-exclamation-circle warning-icon"></i>
+            <span>타인 번호도용·장난 신청 시 IP 추적 및 법적 처벌 대상이 됩니다.</span>
+        </div>
+
+        <!-- 진행상황 바 -->
+        <div class="progress-section">
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 65%;"></div>
+                <span class="progress-text">진행상황 65%</span>
+            </div>
+        </div>
+
+        <!-- 메인 콘텐츠 카드 -->
+        <div class="survey-card">
+            <div class="question-text">4.연락처를 입력해주세요</div>
+            <div class="phone-input-section">
+                <div class="phone-input-container">
+                    <span class="phone-prefix">010</span>
+                    <span class="phone-separator">-</span>
+                    <input type="tel" class="phone-input-part" id="phone2" maxlength="4" placeholder="" oninput="this.value = this.value.replace(/[^0-9]/g, ''); moveToNext(this, 'phone3');">
+                    <span class="phone-separator">-</span>
+                    <input type="tel" class="phone-input-part" id="phone3" maxlength="4" placeholder="" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+                </div>
+            </div>
+            <button class="next-btn" onclick="nextToStep5()">다음</button>
+        </div>
+
+        <!-- 회사 정보 -->
+        <div class="company-info">
+            <p>업체명 : J AUTO FINANCIAL</p>
+            <p>사업자번호 : 542-87-02110</p>
+        </div>
+    </div>
+
+    <!-- 완료 모달 -->
+    <div class="modal-overlay" id="completionModal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-icon">✓</div>
+            <h2 class="modal-title">신청이 완료되었습니다.</h2>
+            <p class="modal-message">빠른시일내에 연락드리겠습니다.</p>
+            <button class="modal-btn" onclick="goToFirstPage()">확인</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+

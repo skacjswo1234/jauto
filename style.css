@@ -1,0 +1,976 @@
+@font-face {
+    font-family: 'Paperlogy';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-1Thin.woff2') format('woff2');
+    font-weight: 100;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Paperlogy';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-2ExtraLight.woff2') format('woff2');
+    font-weight: 200;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Paperlogy';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-3Light.woff2') format('woff2');
+    font-weight: 300;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Paperlogy';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-4Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Paperlogy';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-5Medium.woff2') format('woff2');
+    font-weight: 500;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Paperlogy';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-6SemiBold.woff2') format('woff2');
+    font-weight: 600;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Paperlogy';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-7Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'GmarketSans';
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansLight.woff2') format('woff2');
+    font-weight: 300;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'GmarketSans';
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansMedium.woff2') format('woff2');
+    font-weight: 500;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'GmarketSans';
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansBold.woff2') format('woff2');
+    font-weight: 700;
+    font-display: swap;
+}
+
+/* 전역 리셋 */
+ul, ol, li {
+    list-style: none;
+}
+
+html, body, h1, h2, h3, h4, h5, h6, dl, dt, dd, table, thead, tbody, tfoot, tr, th, td, span, em, p, strong, del, s, q, blockquote, address, form, input, fieldset, legend, button, select, option, textarea, label, ul, ol, li, a, div, header, nav, aside, section, footer, article, video, img {
+    font-size: 1.0em;
+    line-height: 1.0;
+    font-style: normal;
+    font-weight: normal;
+    margin: 0;
+    padding: 0;
+    background: none;
+    border: 0;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Pretendard', sans-serif;
+    color: #111;
+    letter-spacing: -1px;
+    background: linear-gradient(#feffff, #e9edff);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.container {
+    max-width: 500px;
+    width: 100%;
+    text-align: center;
+    display: block;
+}
+
+#page1 {
+    display: block;
+    text-align: center;
+}
+
+.survey-page {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    max-width: 700px;
+    width: 100%;
+}
+
+/* 애니메이션 키프레임 */
+@keyframes round_txt-effect {
+    0%, 100% {
+        color: rgb(255, 255, 255);
+    }
+    50% {
+        color: rgb(255, 255, 0);
+    }
+}
+
+/* 상단 배너 */
+.banner {
+    border-radius: 50px;
+    background: #080e66;
+    background-color: #080e66;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 24px;
+    display: inline-block;
+    margin-bottom: 20px;
+    font-weight: 600;
+    animation: round_txt-effect 1.5s step-end infinite;
+    font-family: 'Paperlogy', sans-serif;
+}
+
+.survey-page .banner {
+    display: inline-block;
+    align-self: flex-start;
+}
+
+/* 메인 헤드라인 */
+.main-headline {
+    margin-bottom: 30px;
+    font-family: 'Paperlogy', sans-serif;
+}
+
+.survey-page .main-headline {
+    text-align: left;
+    width: 100%;
+}
+
+.survey-page .main-headline .line1,
+.survey-page .main-headline .line2 {
+    font-size: 48px;
+}
+
+.main-headline .line1 {
+    display: block;
+    font-size: 28px;
+    font-weight: bold;
+    color: #000000;
+    margin-bottom: 8px;
+}
+
+.main-headline .line2 {
+    display: block;
+    font-size: 28px;
+    font-weight: bold;
+    color: #080e66;
+    text-align: left;
+    margin-left: 0;
+    text-indent: 0;
+}
+
+#page1 .main-headline .line1,
+#page1 .main-headline .line2 {
+    font-size: 48px;
+}
+
+/* 차량 이미지 컨테이너 */
+.car-image-container {
+    margin: 30px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.car-image {
+    max-width: 100%;
+    height: auto;
+    max-height: 300px;
+    object-fit: contain;
+}
+
+/* 설문 참여 안내 */
+.survey-info {
+    background-color: #fff;
+    border-radius: 50px;
+    padding: 10px 20px;
+    font-size: 20px;
+    margin: 20px 0 30px 0;
+    color: #000000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: 'GmarketSans', sans-serif;
+}
+
+.clock-icon {
+    font-size: 22px;
+    color: #080e66;
+    font-weight: bold;
+}
+
+.survey-text {
+    color: #000000;
+}
+
+.survey-time {
+    font-family: 'Pretendard', sans-serif;
+}
+
+.survey-text strong {
+    color: #080e66;
+    font-weight: bold;
+}
+
+/* 동의 체크박스 섹션 */
+.agree-wrap {
+    margin: 15px 0;
+    width: 100%;
+    text-align: center;
+    font-family: 'GmarketSans', sans-serif;
+}
+
+.agree-wrap ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.agree-wrap li {
+    margin: 0;
+    padding: 0;
+    margin-bottom: 4px;
+    list-style: none;
+    position: relative;
+    line-height: 1.0;
+}
+
+.agree-wrap li:last-child {
+    margin-bottom: 0;
+}
+
+.agree-wrap input[type="checkbox"] + label,
+.consent-item {
+    position: relative;
+    cursor: pointer;
+    color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    font-size: 14px;
+    line-height: 1;
+    width: 100%;
+    margin: 0;
+    gap: 5px;
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.checkmark {
+    width: 15px;
+    height: 15px;
+    border: 2px solid #000000;
+    border-radius: 3px;
+    margin-right: 0;
+    display: inline-block;
+    position: relative;
+    flex-shrink: 0;
+    background-color: transparent;
+}
+
+.consent-item input[type="checkbox"]:checked + .checkmark {
+    background-color: #000000;
+    border-color: #000000;
+    background-image: url('https://land.gonplan.co.kr/resources/rent/dgwccw/input_ag_check.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.consent-text {
+    flex: 0 1 auto;
+    margin-right: 0;
+}
+
+.agree-wrap a {
+    display: block;
+    padding: 2px 8px;
+    line-height: 1.3;
+    border-radius: 3px;
+    background: #444;
+    font-size: 10px;
+    color: #fff;
+}
+
+.view-btn {
+    display: block;
+    padding: 2px 8px;
+    line-height: 1.3;
+    border-radius: 3px;
+    background: #444;
+    font-size: 10px;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    margin-left: 0;
+    flex-shrink: 0;
+}
+
+.view-btn:hover {
+    background-color: #333;
+}
+
+/* 설문 시작 버튼 */
+.start-btn {
+    width: 100%;
+    background: #080e66;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 18px 30px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(8, 14, 102, 0.4);
+    margin-bottom: 20px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    font-family: 'Paperlogy', sans-serif;
+}
+
+.start-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(8, 14, 102, 0.5);
+}
+
+.start-btn:active {
+    transform: translateY(0);
+}
+
+/* 경고 텍스트 */
+.warning-text {
+    font-size: 12px;
+    color: #666666;
+    margin-bottom: 20px;
+    font-family: 'Paperlogy', sans-serif;
+}
+
+/* 회사 정보 */
+.company-info {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #E0E0E0;
+    font-size: 14px;
+    color: #666666;
+    line-height: 1.8;
+    font-family: 'Paperlogy', sans-serif;
+}
+
+.survey-page .company-info {
+    text-align: center;
+    width: 100%;
+}
+
+.company-info p {
+    margin: 5px 0;
+}
+
+/* 두 번째 화면 스타일 */
+@keyframes warning-text-blink {
+    0%, 100% {
+        color: #fff;
+    }
+    50% {
+        color: rgb(255, 255, 0);
+    }
+}
+
+.warning-box {
+    background-color: red;
+    padding: 10px;
+    display: inline-block;
+    font-size: 18px;
+    line-height: 1.3;
+    border-radius: 10px;
+    text-align: left;
+    color: #fff;
+    font-weight: 600;
+    margin-top: 10px;
+    width: auto;
+    font-family: 'Pretendard', sans-serif;
+    margin-left: 0;
+    padding-left: 10px;
+}
+
+.warning-box span {
+    white-space: nowrap;
+    animation: warning-text-blink 1.5s step-end infinite;
+}
+
+.warning-icon {
+    font-size: 18px;
+    color: #fff;
+    margin-right: 8px;
+}
+
+.progress-section {
+    width: 100%;
+    margin: 20px 0;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 42px;
+    background-color: #E0E0E0;
+    border-radius: 21px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0 15px;
+}
+
+@keyframes progress-blink {
+    0%, 100% {
+        background: linear-gradient(90deg, #4A90E2 0%, #5B9FE8 100%);
+    }
+    50% {
+        background: linear-gradient(90deg, #5B9FE8 0%, #6CA8F0 100%);
+    }
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #4A90E2 0%, #5B9FE8 100%);
+    border-radius: 21px;
+    transition: width 0.3s ease;
+    animation: progress-blink 2s ease-in-out infinite;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.progress-text {
+    font-size: 16px;
+    color: #333333;
+    font-family: 'Pretendard', sans-serif;
+    font-weight: bold;
+    white-space: nowrap;
+    position: relative;
+    z-index: 1;
+}
+
+.survey-card {
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 30px 20px;
+    margin: 20px 0;
+    width: 100%;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+.question-text {
+    font-size: 30px;
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 20px;
+    font-family: 'GmarketSans', sans-serif;
+}
+
+.option-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.option-btn {
+    flex: 1;
+    padding: 15px 20px;
+    background-color: #fff;
+    border: 2px solid #E0E0E0;
+    border-radius: 8px;
+    font-size: 32px;
+    color: #000;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'GmarketSans', sans-serif;
+    font-weight: 500;
+}
+
+.option-btn:hover {
+    border-color: #080e66;
+    background-color: #F5F8FF;
+    color: #080e66;
+}
+
+.option-btn.selected {
+    border-color: #080e66;
+    background-color: #080e66;
+    color: #fff;
+}
+
+.input-section {
+    margin-bottom: 30px;
+}
+
+.car-input {
+    width: 100%;
+    padding: 15px 20px;
+    border: 2px solid #E0E0E0;
+    border-radius: 8px;
+    font-size: 18px;
+    color: #000;
+    font-family: 'GmarketSans', sans-serif;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.car-input:focus {
+    outline: none;
+    border-color: #080e66;
+    background-color: #F5F8FF;
+}
+
+.car-input::placeholder {
+    color: #999999;
+}
+
+.next-btn {
+    width: 100%;
+    padding: 18px 30px;
+    background-color: #080e66;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'GmarketSans', sans-serif;
+}
+
+.next-btn:hover {
+    background-color: #060a4d;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(8, 14, 102, 0.3);
+}
+
+.next-btn:active {
+    transform: translateY(0);
+}
+
+.phone-input-section {
+    margin-bottom: 30px;
+}
+
+.phone-input-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 15px 20px;
+    border: 2px solid #E0E0E0;
+    border-radius: 8px;
+    background-color: #fff;
+    transition: all 0.3s ease;
+}
+
+.phone-input-container:focus-within {
+    border-color: #080e66;
+    background-color: #F5F8FF;
+}
+
+.phone-prefix {
+    font-size: 18px;
+    color: #666666;
+    font-family: 'GmarketSans', sans-serif;
+    font-weight: 500;
+}
+
+.phone-separator {
+    font-size: 18px;
+    color: #666666;
+    font-family: 'GmarketSans', sans-serif;
+    margin: 0 4px;
+}
+
+.phone-input-part {
+    flex: 1;
+    min-width: 100px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    font-size: 18px;
+    color: #000;
+    font-family: 'GmarketSans', sans-serif;
+    text-align: center;
+    outline: none;
+}
+
+.phone-input-part::placeholder {
+    color: #999999;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 480px) {
+    .main-headline .line1,
+    .main-headline .line2 {
+        font-size: 24px;
+    }
+    
+    .main-headline {
+        display: block;
+        width: 100%;
+        text-align: center;
+    }
+    
+    .main-headline .line1 {
+        display: block;
+        width: 100%;
+        text-align: center;
+        margin-left: 0;
+        padding-left: 0;
+        text-indent: 0;
+        white-space: nowrap;
+        font-size: 28px;
+    }
+    
+    .main-headline .line2 {
+        display: block;
+        width: 100%;
+        text-align: left;
+        margin-left: 0;
+        padding-left: 0;
+        text-indent: 0;
+        white-space: normal;
+    }
+    
+    #page1 .main-headline .line1 {
+        font-size: 32px;
+        text-align: center;
+        margin-left: 0;
+        padding-left: 0;
+        text-indent: 0;
+        display: block;
+        width: 100%;
+        white-space: nowrap;
+    }
+    
+    #page1 .main-headline .line2 {
+        font-size: 32px;
+        text-align: center;
+        margin-left: 0;
+        padding-left: 0;
+        text-indent: 0;
+        display: block;
+        width: 100%;
+        white-space: nowrap;
+    }
+    
+    .survey-page .main-headline .line1 {
+        font-size: 32px;
+        text-align: center;
+        margin-left: 0;
+        padding-left: 0;
+        text-indent: 0;
+        display: block;
+        width: 100%;
+        white-space: nowrap;
+    }
+    
+    .survey-page .main-headline .line2 {
+        font-size: 32px;
+        text-align: center;
+        margin-left: 0;
+        padding-left: 0;
+        text-indent: 0;
+        display: block;
+        width: 100%;
+        white-space: nowrap;
+    }
+    
+    .main-headline .line2 {
+        text-align: center;
+        margin-left: 0;
+        padding-left: 0;
+        text-indent: 0;
+        font-size: 28px;
+        white-space: nowrap;
+    }
+    
+    .car-image {
+        max-height: 250px;
+    }
+    
+    .survey-info {
+        font-size: 14px;
+    }
+    
+    .start-btn {
+        font-size: 18px;
+        padding: 16px 25px;
+    }
+
+    .survey-card {
+        padding: 20px 15px;
+    }
+
+    .question-text {
+        font-size: 20px;
+        text-align: left;
+        margin-left: 0;
+        padding-left: 0;
+        text-indent: 0;
+        white-space: nowrap;
+        width: 100%;
+    }
+    
+    .survey-card {
+        text-align: left;
+    }
+
+    .option-btn {
+        padding: 12px 15px;
+        font-size: 24px;
+    }
+    
+    .warning-box {
+        font-size: 18px;
+        padding: 12px 16px;
+        width: 100%;
+        text-align: left;
+        margin-left: 0;
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+    
+    .warning-box span {
+        white-space: normal;
+    }
+    
+    .progress-text {
+        font-size: 18px;
+        font-weight: bold;
+        color: #000;
+    }
+    
+    .banner {
+        font-size: 24px;
+        padding: 12px 20px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+    }
+    
+    .container {
+        text-align: center;
+    }
+    
+    .survey-page .banner {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+    }
+    
+    .car-input {
+        font-size: 16px;
+        padding: 12px 16px;
+    }
+}
+
+@media (max-width: 358px) {
+    .main-headline {
+        text-align: center;
+    }
+    
+    #page1 .main-headline .line1 {
+        font-size: 28px;
+        text-align: center;
+        white-space: nowrap;
+    }
+    
+    #page1 .main-headline .line2 {
+        font-size: 28px;
+        text-align: center;
+        white-space: nowrap;
+    }
+    
+    .survey-page .main-headline .line1 {
+        font-size: 28px;
+        text-align: center;
+        white-space: nowrap;
+    }
+    
+    .survey-page .main-headline .line2 {
+        font-size: 28px;
+        text-align: center;
+        white-space: nowrap;
+    }
+    
+    .main-headline .line1 {
+        font-size: 26px;
+        text-align: center;
+        white-space: nowrap;
+    }
+    
+    .main-headline .line2 {
+        font-size: 26px;
+        text-align: center;
+        white-space: nowrap;
+    }
+    
+    .phone-input-container {
+        padding: 12px 16px;
+        gap: 6px;
+    }
+    
+    .phone-prefix,
+    .phone-separator,
+    .phone-input-part {
+        font-size: 16px;
+    }
+    
+    .phone-input-part {
+        min-width: 80px;
+    }
+    
+    .next-btn {
+        font-size: 18px;
+        padding: 16px 25px;
+    }
+}
+
+/* 완료 모달 */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: #fff;
+    border-radius: 16px;
+    padding: 40px 30px;
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+.modal-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: #080e66;
+    color: #fff;
+    font-size: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-weight: bold;
+}
+
+.modal-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #080e66;
+    margin-bottom: 15px;
+    font-family: 'GmarketSans', sans-serif;
+}
+
+.modal-message {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 30px;
+    line-height: 1.6;
+    font-family: 'Pretendard', sans-serif;
+}
+
+.modal-btn {
+    width: 100%;
+    padding: 16px 30px;
+    background-color: #080e66;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'GmarketSans', sans-serif;
+}
+
+.modal-btn:hover {
+    background-color: #060a4d;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(8, 14, 102, 0.3);
+}
+
+.modal-btn:active {
+    transform: translateY(0);
+}
+
+@media (max-width: 480px) {
+    .modal-content {
+        padding: 30px 20px;
+    }
+    
+    .modal-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 40px;
+    }
+    
+    .modal-title {
+        font-size: 20px;
+    }
+    
+    .modal-message {
+        font-size: 16px;
+    }
+    
+    .modal-btn {
+        font-size: 16px;
+        padding: 14px 25px;
+    }
+}
+
