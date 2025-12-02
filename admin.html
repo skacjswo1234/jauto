@@ -100,7 +100,7 @@
             display: none;
             position: fixed;
             top: 20px;
-            left: 20px;
+            right: 20px;
             z-index: 1001;
             background-color: #080e66;
             color: #fff;
@@ -392,7 +392,10 @@
             }
 
             .admin-sidebar {
-                transform: translateX(-100%);
+                right: 0;
+                left: auto;
+                transform: translateX(100%);
+                width: 280px;
             }
 
             .admin-sidebar.open {
@@ -494,6 +497,95 @@
         .sidebar-overlay.open {
             display: block;
         }
+
+        /* 비밀번호 변경 폼 스타일 */
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            font-family: 'Pretendard', sans-serif;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            font-family: 'Pretendard', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #080e66;
+            background-color: #f8f9ff;
+        }
+
+        .password-wrapper {
+            position: relative;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #666;
+            cursor: pointer;
+            font-size: 18px;
+            padding: 0;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .password-toggle:hover {
+            color: #080e66;
+        }
+
+        .error-message {
+            background-color: #ffebee;
+            color: #c62828;
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .success-message {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top-color: #fff;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-right: 8px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body>
@@ -523,6 +615,18 @@
                     <a href="#" class="nav-link" onclick="showTab('stats'); return false;">
                         <i class="fas fa-chart-bar"></i>
                         <span>통계</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" onclick="showTab('password'); return false;">
+                        <i class="fas fa-key"></i>
+                        <span>비밀번호 변경</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" onclick="handleLogout(); return false;">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>로그아웃</span>
                     </a>
                 </li>
             </ul>
@@ -612,6 +716,88 @@
                     </div>
                 </div>
             </div>
+
+            <!-- 비밀번호 변경 탭 -->
+            <div id="passwordTab" class="tab-content">
+                <div class="admin-header">
+                    <h1 class="page-title">비밀번호 변경</h1>
+                </div>
+                <div class="table-container">
+                    <form id="passwordChangeForm" onsubmit="handlePasswordChange(event)">
+                        <div class="form-group" style="margin-bottom: 25px;">
+                            <label class="form-label" for="currentPassword">현재 비밀번호</label>
+                            <div class="password-wrapper">
+                                <input 
+                                    type="password" 
+                                    id="currentPassword" 
+                                    class="form-input" 
+                                    placeholder="현재 비밀번호를 입력하세요"
+                                    required
+                                    autocomplete="current-password"
+                                >
+                                <button 
+                                    type="button" 
+                                    class="password-toggle" 
+                                    onclick="togglePassword('currentPassword', 'currentPasswordToggleIcon')"
+                                >
+                                    <i class="fas fa-eye" id="currentPasswordToggleIcon"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="form-group" style="margin-bottom: 25px;">
+                            <label class="form-label" for="newPassword">새 비밀번호</label>
+                            <div class="password-wrapper">
+                                <input 
+                                    type="password" 
+                                    id="newPassword" 
+                                    class="form-input" 
+                                    placeholder="새 비밀번호를 입력하세요 (최소 4자)"
+                                    required
+                                    minlength="4"
+                                    autocomplete="new-password"
+                                >
+                                <button 
+                                    type="button" 
+                                    class="password-toggle" 
+                                    onclick="togglePassword('newPassword', 'newPasswordToggleIcon')"
+                                >
+                                    <i class="fas fa-eye" id="newPasswordToggleIcon"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="form-group" style="margin-bottom: 30px;">
+                            <label class="form-label" for="confirmPassword">새 비밀번호 확인</label>
+                            <div class="password-wrapper">
+                                <input 
+                                    type="password" 
+                                    id="confirmPassword" 
+                                    class="form-input" 
+                                    placeholder="새 비밀번호를 다시 입력하세요"
+                                    required
+                                    minlength="4"
+                                    autocomplete="new-password"
+                                >
+                                <button 
+                                    type="button" 
+                                    class="password-toggle" 
+                                    onclick="togglePassword('confirmPassword', 'confirmPasswordToggleIcon')"
+                                >
+                                    <i class="fas fa-eye" id="confirmPasswordToggleIcon"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="error-message" id="passwordErrorMessage" style="display: none;"></div>
+                        <div class="success-message" id="passwordSuccessMessage" style="display: none;"></div>
+
+                        <button type="submit" class="login-btn" id="passwordChangeBtn">
+                            비밀번호 변경
+                        </button>
+                    </form>
+                </div>
+            </div>
         </main>
     </div>
 
@@ -622,6 +808,97 @@
 
         // API 기본 URL
         const API_BASE_URL = '/api/inquiries';
+
+        // 로그아웃
+        function handleLogout() {
+            if (confirm('로그아웃 하시겠습니까?')) {
+                window.location.href = '/login.html';
+            }
+        }
+
+        // 비밀번호 표시/숨김 토글
+        function togglePassword(inputId, iconId) {
+            const passwordInput = document.getElementById(inputId);
+            const toggleIcon = document.getElementById(iconId);
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleIcon.classList.remove('fa-eye');
+                toggleIcon.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                toggleIcon.classList.remove('fa-eye-slash');
+                toggleIcon.classList.add('fa-eye');
+            }
+        }
+
+        // 비밀번호 변경 처리
+        async function handlePasswordChange(event) {
+            event.preventDefault();
+            
+            const currentPassword = document.getElementById('currentPassword').value;
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const errorMessage = document.getElementById('passwordErrorMessage');
+            const successMessage = document.getElementById('passwordSuccessMessage');
+            const changeBtn = document.getElementById('passwordChangeBtn');
+
+            // 에러/성공 메시지 초기화
+            errorMessage.style.display = 'none';
+            successMessage.style.display = 'none';
+            errorMessage.textContent = '';
+            successMessage.textContent = '';
+
+            // 새 비밀번호 확인
+            if (newPassword !== confirmPassword) {
+                errorMessage.textContent = '새 비밀번호가 일치하지 않습니다.';
+                errorMessage.style.display = 'block';
+                return;
+            }
+
+            // 로딩 상태
+            changeBtn.disabled = true;
+            changeBtn.innerHTML = '<span class="loading"></span>변경 중...';
+
+            try {
+                const response = await fetch('/api/admin/change-password', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        currentPassword,
+                        newPassword
+                    })
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    successMessage.textContent = result.message || '비밀번호가 성공적으로 변경되었습니다.';
+                    successMessage.style.display = 'block';
+                    
+                    // 폼 초기화
+                    document.getElementById('passwordChangeForm').reset();
+                    
+                    // 3초 후 로그아웃
+                    setTimeout(() => {
+                        handleLogout();
+                    }, 3000);
+                } else {
+                    errorMessage.textContent = result.error || '비밀번호 변경에 실패했습니다.';
+                    errorMessage.style.display = 'block';
+                    changeBtn.disabled = false;
+                    changeBtn.textContent = '비밀번호 변경';
+                }
+            } catch (error) {
+                console.error('Password change error:', error);
+                errorMessage.textContent = '비밀번호 변경 중 오류가 발생했습니다.';
+                errorMessage.style.display = 'block';
+                changeBtn.disabled = false;
+                changeBtn.textContent = '비밀번호 변경';
+            }
+        }
 
         // 페이지 로드 시
         document.addEventListener('DOMContentLoaded', function() {
@@ -658,8 +935,10 @@
             // 선택된 탭 표시
             document.getElementById(tabName + 'Tab').classList.add('active');
 
-            // 선택된 네비게이션 링크 활성화
-            event.target.closest('.nav-link').classList.add('active');
+            // 선택된 네비게이션 링크 활성화 (로그아웃 제외)
+            if (event && event.target.closest('.nav-link')) {
+                event.target.closest('.nav-link').classList.add('active');
+            }
 
             // 모바일에서 탭 전환 시 사이드바 닫기
             if (window.innerWidth <= 768) {
@@ -669,6 +948,13 @@
             // 통계 탭일 경우 통계 업데이트
             if (tabName === 'stats') {
                 updateStatsTab();
+            }
+
+            // 비밀번호 변경 탭일 경우 폼 초기화
+            if (tabName === 'password') {
+                document.getElementById('passwordChangeForm').reset();
+                document.getElementById('passwordErrorMessage').style.display = 'none';
+                document.getElementById('passwordSuccessMessage').style.display = 'none';
             }
         }
 
