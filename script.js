@@ -121,6 +121,12 @@ async function nextToStep5() {
     // 완료 모달 표시
     document.getElementById('page5').style.display = 'none';
     document.getElementById('completionModal').style.display = 'flex';
+    
+    // Danggeun Market Code - 잠재고객(리드)코드
+    if (window.karrotPixel) {
+        window.karrotPixel.track('Lead');
+    }
+    // End Danggeun Market Code
 }
 
 // 첫 화면으로 돌아가기
@@ -164,12 +170,6 @@ function goToFirstPage() {
     checkboxes.forEach(checkbox => {
         checkbox.checked = true;
     });
-    
-    // Danggeun Market Code - 잠재고객(리드)코드
-    if (window.karrotPixel) {
-        window.karrotPixel.track('Lead');
-    }
-    // End Danggeun Market Code
 }
 
 // 전화번호 입력 자동 포커스 이동
