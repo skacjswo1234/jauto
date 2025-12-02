@@ -136,43 +136,74 @@
         }
 
         .admin-header {
-            background-color: #fff;
-            padding: 20px;
+            background: linear-gradient(135deg, #080e66 0%, #1a237e 100%);
+            padding: 25px 20px;
             border-radius: 12px;
             margin-bottom: 20px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 15px rgba(8, 14, 102, 0.2);
             display: flex;
             flex-direction: column;
             gap: 15px;
         }
 
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .header-company {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .header-company-name {
+            font-size: 18px;
+            font-weight: bold;
+            color: #fff;
+            font-family: 'Pretendard', sans-serif;
+        }
+
+        .header-company-subtitle {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.8);
+            font-family: 'Pretendard', sans-serif;
+        }
+
         .page-title {
             font-size: 20px;
             font-weight: bold;
-            color: #080e66;
+            color: #fff;
             font-family: 'Pretendard', sans-serif;
             text-align: center;
+            margin: 0;
         }
 
         .refresh-btn {
-            background-color: #080e66;
+            background-color: rgba(255, 255, 255, 0.2);
             color: #fff;
-            border: none;
-            padding: 12px 20px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 10px 18px;
             border-radius: 8px;
             cursor: pointer;
-            font-weight: bold;
+            font-weight: 500;
             font-family: 'Pretendard', sans-serif;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
-            width: 100%;
             font-size: 14px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
         }
 
         .refresh-btn:hover {
-            background-color: #060a4d;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px);
         }
 
         /* 통계 카드 */
@@ -487,20 +518,32 @@
             }
 
             .admin-header {
-                flex-direction: row;
-                justify-content: space-between;
-                align-items: center;
-                padding: 20px 30px;
+                flex-direction: column;
+                padding: 25px 30px;
+            }
+
+            .header-top {
+                width: 100%;
+            }
+
+            .header-company-name {
+                font-size: 20px;
+            }
+
+            .header-company-subtitle {
+                font-size: 13px;
             }
 
             .page-title {
                 font-size: 24px;
                 text-align: left;
+                margin-top: 10px;
             }
 
             .refresh-btn {
                 width: auto;
-                font-size: 16px;
+                font-size: 15px;
+                padding: 12px 20px;
             }
 
             .stats-section {
@@ -614,11 +657,17 @@
         <!-- 문의 관리 탭 -->
         <div id="inquiriesTab" class="tab-content active">
             <div class="admin-header">
+                <div class="header-top">
+                    <div class="header-company">
+                        <div class="header-company-name">J AUTO FINANCIAL</div>
+                        <div class="header-company-subtitle">관리자 대시보드</div>
+                    </div>
+                    <button class="refresh-btn" onclick="loadInquiries()" id="refreshBtn">
+                        <i class="fas fa-sync-alt"></i>
+                        <span>새로고침</span>
+                    </button>
+                </div>
                 <h1 class="page-title">문의 관리</h1>
-                <button class="refresh-btn" onclick="loadInquiries()" id="refreshBtn">
-                    <i class="fas fa-sync-alt"></i>
-                    <span>새로고침</span>
-                </button>
             </div>
 
             <div class="stats-section">
@@ -667,11 +716,17 @@
             </div>
         </div>
 
-        <!-- 통계 탭 -->
-        <div id="statsTab" class="tab-content">
-            <div class="admin-header">
-                <h1 class="page-title">통계</h1>
-            </div>
+            <!-- 통계 탭 -->
+            <div id="statsTab" class="tab-content">
+                <div class="admin-header">
+                    <div class="header-top">
+                        <div class="header-company">
+                            <div class="header-company-name">J AUTO FINANCIAL</div>
+                            <div class="header-company-subtitle">관리자 대시보드</div>
+                        </div>
+                    </div>
+                    <h1 class="page-title">통계</h1>
+                </div>
             <div class="stats-section">
                 <div class="stat-card">
                     <div class="stat-number" id="statsTotalCount">0</div>
@@ -692,11 +747,17 @@
             </div>
         </div>
 
-        <!-- 비밀번호 변경 탭 -->
-        <div id="passwordTab" class="tab-content">
-            <div class="admin-header">
-                <h1 class="page-title">비밀번호 변경</h1>
-            </div>
+            <!-- 비밀번호 변경 탭 -->
+            <div id="passwordTab" class="tab-content">
+                <div class="admin-header">
+                    <div class="header-top">
+                        <div class="header-company">
+                            <div class="header-company-name">J AUTO FINANCIAL</div>
+                            <div class="header-company-subtitle">관리자 대시보드</div>
+                        </div>
+                    </div>
+                    <h1 class="page-title">비밀번호 변경</h1>
+                </div>
             <div class="table-container">
                 <form id="passwordChangeForm" onsubmit="handlePasswordChange(event)">
                     <div class="form-group">
