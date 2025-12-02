@@ -72,7 +72,7 @@ function nextToStep4() {
 }
 
 // 5번째 화면으로 이동 함수
-function nextToStep5() {
+async function nextToStep5() {
     const phone2 = document.getElementById('phone2').value.trim();
     const phone3 = document.getElementById('phone3').value.trim();
     
@@ -83,6 +83,34 @@ function nextToStep5() {
     
     const fullPhone = `010-${phone2}-${phone3}`;
     window.selectedPhone = fullPhone;
+    
+    // 데이터베이스에 저장
+    try {
+        const inquiryData = {
+            name: window.selectedUserName || '',
+            phone: fullPhone,
+            car_name: window.selectedCarName || '',
+            usage_type: window.selectedOption || ''
+        };
+
+        const response = await fetch('/api/inquiries', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(inquiryData)
+        });
+
+        const result = await response.json();
+        
+        if (!result.success) {
+            console.error('문의 저장 실패:', result.error);
+            // 저장 실패해도 사용자에게는 성공으로 보여줌 (UX 고려)
+        }
+    } catch (error) {
+        console.error('문의 저장 중 오류:', error);
+        // 오류가 발생해도 사용자에게는 성공으로 보여줌 (UX 고려)
+    }
     
     // 완료 모달 표시
     document.getElementById('page5').style.display = 'none';

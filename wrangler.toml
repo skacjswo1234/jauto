@@ -1,0 +1,8 @@
+name = "jauto"
+compatibility_date = "2024-01-01"
+
+[[d1_databases]]
+binding = "jauto-db"
+database_name = "jauto-db"
+database_id = "6edad3ee-c05b-4fa3-9bfb-60cdb8d622ec"
+
