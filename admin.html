@@ -27,33 +27,38 @@
 
         /* 왼쪽 네비게이션 (데스크탑) */
         .admin-sidebar {
-            width: 250px;
+            width: 280px;
             background-color: #080e66;
             color: #fff;
-            padding: 30px 0;
+            padding: 40px 0;
             position: fixed;
+            left: 0;
+            top: 0;
             height: 100vh;
             overflow-y: auto;
             z-index: 1000;
             transition: transform 0.3s ease;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
         }
 
         .company-header {
-            padding: 0 25px 30px;
+            padding: 0 30px 35px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
 
         .company-name {
-            font-size: 20px;
+            font-size: 22px;
             font-weight: bold;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
             font-family: 'GmarketSans', sans-serif;
+            line-height: 1.3;
         }
 
         .company-number {
-            font-size: 12px;
-            color: rgba(255, 255, 255, 0.7);
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.5;
         }
 
         .nav-menu {
@@ -69,12 +74,13 @@
         .nav-link {
             display: flex;
             align-items: center;
-            padding: 15px 25px;
-            color: rgba(255, 255, 255, 0.8);
+            padding: 16px 30px;
+            color: rgba(255, 255, 255, 0.85);
             text-decoration: none;
             transition: all 0.3s ease;
             cursor: pointer;
             border-left: 3px solid transparent;
+            font-size: 15px;
         }
 
         .nav-link:hover {
@@ -110,14 +116,23 @@
             cursor: pointer;
             font-size: 20px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            width: 48px;
+            height: 48px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mobile-menu-toggle:hover {
+            background-color: #060a4d;
         }
 
         /* 오른쪽 메인 콘텐츠 */
         .admin-main {
             flex: 1;
-            margin-left: 250px;
-            padding: 30px;
+            margin-left: 280px;
+            padding: 40px;
             transition: margin-left 0.3s ease;
+            min-height: 100vh;
         }
 
         .admin-header {
@@ -388,14 +403,16 @@
         /* 모바일 반응형 */
         @media (max-width: 768px) {
             .mobile-menu-toggle {
-                display: block;
+                display: flex;
             }
 
             .admin-sidebar {
                 right: 0;
                 left: auto;
+                width: 320px;
+                max-width: 85vw;
                 transform: translateX(100%);
-                width: 280px;
+                box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
             }
 
             .admin-sidebar.open {
@@ -403,9 +420,10 @@
             }
 
             .admin-main {
-                margin-left: 0;
+                margin-left: 0 !important;
                 padding: 20px 15px;
-                padding-top: 70px;
+                padding-top: 80px;
+                width: 100%;
             }
 
             .admin-header {
@@ -433,11 +451,12 @@
 
             .table-container {
                 padding: 15px;
+                overflow-x: auto;
             }
 
             .inquiries-table {
                 font-size: 12px;
-                min-width: 600px;
+                min-width: 700px;
             }
 
             .inquiries-table th,
@@ -454,12 +473,21 @@
                 padding: 8px 16px;
                 font-size: 14px;
             }
+
+            .company-header {
+                padding: 0 25px 30px;
+            }
+
+            .nav-link {
+                padding: 14px 25px;
+                font-size: 14px;
+            }
         }
 
         @media (max-width: 480px) {
             .admin-main {
                 padding: 15px 10px;
-                padding-top: 70px;
+                padding-top: 80px;
             }
 
             .table-container {
@@ -467,7 +495,7 @@
             }
 
             .inquiries-table {
-                min-width: 500px;
+                min-width: 600px;
                 font-size: 11px;
             }
 
@@ -479,6 +507,18 @@
             .delete-btn {
                 padding: 5px 10px;
                 font-size: 11px;
+            }
+
+            .admin-sidebar {
+                width: 280px;
+            }
+
+            .mobile-menu-toggle {
+                top: 15px;
+                right: 15px;
+                width: 44px;
+                height: 44px;
+                padding: 10px;
             }
         }
 
@@ -595,7 +635,7 @@
     </button>
 
     <!-- 오버레이 -->
-    <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
     <div class="admin-wrapper">
         <!-- 왼쪽 네비게이션 -->
@@ -812,6 +852,7 @@
         // 로그아웃
         function handleLogout() {
             if (confirm('로그아웃 하시겠습니까?')) {
+                sessionStorage.removeItem('adminLoggedIn');
                 window.location.href = '/login.html';
             }
         }
@@ -900,8 +941,27 @@
             }
         }
 
+        // 로그인 체크 (간단한 세션 체크)
+        function checkLogin() {
+            // 세션 스토리지에 로그인 플래그 확인
+            const isLoggedIn = sessionStorage.getItem('adminLoggedIn');
+            
+            if (!isLoggedIn) {
+                // 로그인하지 않았으면 로그인 페이지로 리다이렉트
+                window.location.href = '/login.html';
+                return false;
+            }
+            
+            return true;
+        }
+
         // 페이지 로드 시
         document.addEventListener('DOMContentLoaded', function() {
+            // 로그인 체크
+            if (!checkLogin()) {
+                return;
+            }
+            
             loadInquiries();
         });
 
@@ -1124,6 +1184,11 @@
             if (window.innerWidth > 768) {
                 closeSidebar();
             }
+        });
+
+        // 오버레이 클릭 시 사이드바 닫기
+        document.getElementById('sidebarOverlay').addEventListener('click', function() {
+            closeSidebar();
         });
     </script>
 </body>

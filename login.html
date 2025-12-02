@@ -273,6 +273,8 @@
                 const result = await response.json();
 
                 if (result.success) {
+                    // 세션 스토리지에 로그인 플래그 설정
+                    sessionStorage.setItem('adminLoggedIn', 'true');
                     // 관리자 페이지로 이동
                     window.location.href = '/admin.html';
                 } else {
