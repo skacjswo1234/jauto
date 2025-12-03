@@ -1095,12 +1095,24 @@
 
         function formatDate(dateString) {
             if (!dateString) return '-';
-            const date = new Date(dateString);
-            const year = date.getFullYear();
-            const month = String(date.getMonth() + 1).padStart(2, '0');
-            const day = String(date.getDate()).padStart(2, '0');
-            const hours = String(date.getHours()).padStart(2, '0');
-            const minutes = String(date.getMinutes()).padStart(2, '0');
+            // UTC 시간으로 파싱 (SQLite datetime은 UTC로 저장됨)
+            // 날짜 문자열이 'YYYY-MM-DD HH:MM:SS' 형식인 경우 UTC로 처리
+            let date;
+            if (dateString.includes('T')) {
+                // ISO 형식인 경우
+                date = new Date(dateString);
+            } else {
+                // SQLite datetime 형식인 경우 (YYYY-MM-DD HH:MM:SS)
+                date = new Date(dateString + 'Z'); // UTC로 명시
+            }
+            
+            // 한국 시간(KST, UTC+9)으로 변환
+            const kstDate = new Date(date.getTime() + (9 * 60 * 60 * 1000));
+            const year = kstDate.getUTCFullYear();
+            const month = String(kstDate.getUTCMonth() + 1).padStart(2, '0');
+            const day = String(kstDate.getUTCDate()).padStart(2, '0');
+            const hours = String(kstDate.getUTCHours()).padStart(2, '0');
+            const minutes = String(kstDate.getUTCMinutes()).padStart(2, '0');
             return `${year}-${month}-${day}<br>${hours}:${minutes}`;
         }
 
