@@ -343,6 +343,35 @@
             background-color: #cc0000;
         }
 
+        /* 메모 입력 */
+        .memo-container {
+            width: 100%;
+            min-width: 150px;
+        }
+
+        .memo-input {
+            width: 100%;
+            padding: 6px 10px;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 11px;
+            font-family: 'Pretendard', sans-serif;
+            transition: all 0.3s ease;
+            background-color: #fff;
+        }
+
+        .memo-input:focus {
+            outline: none;
+            border-color: #080e66;
+            background-color: #f8f9ff;
+            box-shadow: 0 0 0 2px rgba(8, 14, 102, 0.1);
+        }
+
+        .memo-input::placeholder {
+            color: #999;
+            font-size: 10px;
+        }
+
         /* 페이지네이션 */
         .pagination {
             display: flex;
@@ -756,6 +785,7 @@
                             <th>희망차량</th>
                             <th>이용방식</th>
                             <th>IP주소</th>
+                            <th>메모</th>
                             <th>등록일시</th>
                             <th>관리</th>
                         </tr>
@@ -998,6 +1028,18 @@
                                     <td>${inquiry.car_name || '-'}</td>
                                     <td>${usageBadge}</td>
                                     <td style="font-size: 10px; color: #999;">${inquiry.ip_address || '-'}</td>
+                                    <td>
+                                        <div class="memo-container">
+                                            <input 
+                                                type="text" 
+                                                class="memo-input" 
+                                                value="${(inquiry.memo || '').replace(/"/g, '&quot;')}" 
+                                                placeholder="메모 입력..."
+                                                onblur="saveMemo(${inquiry.id}, this.value)"
+                                                onkeypress="if(event.key==='Enter') { this.blur(); }"
+                                            >
+                                        </div>
+                                    </td>
                                     <td>${formatDate(inquiry.created_at)}</td>
                                     <td>
                                         <button class="delete-btn" onclick="deleteInquiry(${inquiry.id})">
@@ -1067,6 +1109,26 @@
                 nextBtn.disabled = currentPage === totalPages;
             } else {
                 pagination.style.display = 'none';
+            }
+        }
+
+        async function saveMemo(id, memo) {
+            try {
+                const response = await fetch(`${API_BASE_URL}/${id}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ memo: memo.trim() })
+                });
+                const result = await response.json();
+
+                if (!result.success) {
+                    console.error('메모 저장 실패:', result.error);
+                    // 실패해도 사용자에게 알리지 않음 (자동 저장이므로)
+                }
+            } catch (error) {
+                console.error('Error saving memo:', error);
             }
         }
 
