@@ -343,199 +343,30 @@
             background-color: #cc0000;
         }
 
-        /* 메모 버튼 */
-        .memo-btn {
-            background-color: #f0f0f0;
-            color: #333;
-            border: 1px solid #ddd;
-            padding: 6px 12px;
+        /* 메모 입력 */
+        .memo-input {
+            width: 100%;
+            min-width: 150px;
+            padding: 6px 10px;
+            border: 1px solid #e0e0e0;
             border-radius: 6px;
-            cursor: pointer;
             font-size: 11px;
-            font-weight: 500;
-            transition: all 0.3s ease;
             font-family: 'Pretendard', sans-serif;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .memo-btn:hover {
-            background-color: #080e66;
-            color: #fff;
-            border-color: #080e66;
-        }
-
-        .memo-btn-has-memo {
-            background-color: #e3f2fd;
-            color: #1976d2;
-            border-color: #90caf9;
-        }
-
-        .memo-btn-has-memo:hover {
-            background-color: #1976d2;
-            color: #fff;
-            border-color: #1976d2;
-        }
-
-        .memo-btn i {
-            font-size: 12px;
-        }
-
-        /* 메모 모달 */
-        .memo-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 2000;
-        }
-
-        .memo-modal.active {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .memo-modal-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(4px);
-        }
-
-        .memo-modal-content {
-            position: relative;
+            transition: all 0.3s ease;
             background-color: #fff;
-            border-radius: 12px;
-            width: 90%;
-            max-width: 600px;
-            max-height: 90vh;
-            display: flex;
-            flex-direction: column;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-            z-index: 2001;
-        }
-
-        .memo-modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 25px;
-            border-bottom: 1px solid #e9ecef;
-        }
-
-        .memo-modal-header h3 {
-            margin: 0;
-            font-size: 18px;
-            font-weight: 600;
-            color: #080e66;
-            font-family: 'Pretendard', sans-serif;
-        }
-
-        .memo-modal-close {
-            background: none;
-            border: none;
-            font-size: 20px;
-            color: #666;
-            cursor: pointer;
-            padding: 0;
-            width: 30px;
-            height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 6px;
-            transition: all 0.3s ease;
-        }
-
-        .memo-modal-close:hover {
-            background-color: #f0f0f0;
-            color: #333;
-        }
-
-        .memo-modal-body {
-            padding: 25px;
-            flex: 1;
-            overflow-y: auto;
-        }
-
-        .memo-textarea {
-            width: 100%;
-            padding: 12px 14px;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 14px;
-            font-family: 'Pretendard', sans-serif;
-            resize: vertical;
-            min-height: 150px;
-            transition: all 0.3s ease;
             box-sizing: border-box;
         }
 
-        .memo-textarea:focus {
+        .memo-input:focus {
             outline: none;
             border-color: #080e66;
             background-color: #f8f9ff;
+            box-shadow: 0 0 0 2px rgba(8, 14, 102, 0.1);
         }
 
-        .memo-textarea::placeholder {
+        .memo-input::placeholder {
             color: #999;
-        }
-
-        .memo-modal-footer {
-            display: flex;
-            justify-content: flex-end;
-            gap: 10px;
-            padding: 20px 25px;
-            border-top: 1px solid #e9ecef;
-        }
-
-        .memo-cancel-btn {
-            background-color: #f0f0f0;
-            color: #333;
-            border: 1px solid #ddd;
-            padding: 10px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 500;
-            font-family: 'Pretendard', sans-serif;
-            font-size: 14px;
-            transition: all 0.3s ease;
-        }
-
-        .memo-cancel-btn:hover {
-            background-color: #e0e0e0;
-        }
-
-        .memo-save-btn {
-            background-color: #080e66;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 500;
-            font-family: 'Pretendard', sans-serif;
-            font-size: 14px;
-            transition: all 0.3s ease;
-        }
-
-        .memo-save-btn:hover:not(:disabled) {
-            background-color: #060a4d;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(8, 14, 102, 0.3);
-        }
-
-        .memo-save-btn:disabled {
-            background-color: #ccc;
-            cursor: not-allowed;
-            transform: none;
+            font-size: 10px;
         }
 
         /* 페이지네이션 */
@@ -1089,39 +920,10 @@
         </div>
     </main>
 
-    <!-- 메모 모달 -->
-    <div id="memoModal" class="memo-modal">
-        <div class="memo-modal-overlay" onclick="closeMemoModal()"></div>
-        <div class="memo-modal-content">
-            <div class="memo-modal-header">
-                <h3>메모 관리</h3>
-                <button class="memo-modal-close" onclick="closeMemoModal()">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <div class="memo-modal-body">
-                <div class="form-group">
-                    <label class="form-label">메모 내용</label>
-                    <textarea 
-                        id="memoTextarea" 
-                        class="memo-textarea" 
-                        placeholder="메모를 입력하세요..."
-                        rows="8"
-                    ></textarea>
-                </div>
-            </div>
-            <div class="memo-modal-footer">
-                <button class="memo-cancel-btn" onclick="closeMemoModal()">취소</button>
-                <button class="memo-save-btn" onclick="saveMemoFromModal()">저장</button>
-            </div>
-        </div>
-    </div>
-
     <script>
         let currentPage = 1;
         let totalPages = 1;
         let allInquiries = [];
-        let currentMemoId = null;
 
         const API_BASE_URL = '/api/inquiries';
 
@@ -1224,10 +1026,15 @@
                                     <td>${usageBadge}</td>
                                     <td style="font-size: 10px; color: #999;">${inquiry.ip_address || '-'}</td>
                                     <td>
-                                        <button class="memo-btn ${inquiry.memo ? 'memo-btn-has-memo' : ''}" onclick="openMemoModal(${inquiry.id}, '${(inquiry.memo || '').replace(/'/g, "\\'").replace(/"/g, '&quot;').replace(/\n/g, '\\n').replace(/\r/g, '')}')">
-                                            <i class="fas fa-sticky-note"></i>
-                                            <span>${inquiry.memo ? '메모 보기' : '메모 추가'}</span>
-                                        </button>
+                                        <input 
+                                            type="text" 
+                                            class="memo-input" 
+                                            value="${(inquiry.memo || '').replace(/"/g, '&quot;')}" 
+                                            placeholder="메모 입력..."
+                                            data-inquiry-id="${inquiry.id}"
+                                            onblur="saveMemoInline(${inquiry.id}, this.value)"
+                                            onkeypress="if(event.key==='Enter') { this.blur(); }"
+                                        >
                                     </td>
                                     <td>${formatDate(inquiry.created_at)}</td>
                                     <td>
@@ -1301,70 +1108,28 @@
             }
         }
 
-        // 메모 모달 열기
-        function openMemoModal(id, memo) {
-            currentMemoId = id;
-            const modal = document.getElementById('memoModal');
-            const textarea = document.getElementById('memoTextarea');
-            
-            // 메모 내용 설정 (이스케이프 처리 해제)
-            let memoText = '';
-            if (memo) {
-                memoText = memo
-                    .replace(/\\n/g, '\n')
-                    .replace(/\\'/g, "'")
-                    .replace(/&quot;/g, '"')
-                    .replace(/&lt;/g, '<')
-                    .replace(/&gt;/g, '>')
-                    .replace(/&amp;/g, '&');
-            }
-            textarea.value = memoText;
-            modal.classList.add('active');
-            
-            // 모달이 열린 후 텍스트 영역에 포커스
-            setTimeout(() => {
-                textarea.focus();
-                // 커서를 끝으로 이동
-                textarea.setSelectionRange(textarea.value.length, textarea.value.length);
-            }, 100);
-        }
+        // 인라인 메모 저장
+        async function saveMemoInline(id, memo) {
+            if (!id) return;
 
-        // 메모 모달 닫기
-        function closeMemoModal() {
-            const modal = document.getElementById('memoModal');
-            const saveBtn = document.querySelector('.memo-save-btn');
+            const memoValue = memo.trim();
+            const inputElement = document.querySelector(`.memo-input[data-inquiry-id="${id}"]`);
             
-            // 버튼 상태 초기화
-            if (saveBtn) {
-                saveBtn.disabled = false;
-                saveBtn.innerHTML = '저장';
-            }
-            
-            modal.classList.remove('active');
-            currentMemoId = null;
-        }
+            if (!inputElement) return;
 
-        // 모달에서 메모 저장
-        async function saveMemoFromModal() {
-            if (currentMemoId === null) return;
-
-            const textarea = document.getElementById('memoTextarea');
-            const memo = textarea.value.trim();
-            const saveBtn = document.querySelector('.memo-save-btn');
-
-            // 버튼 상태 저장
-            const originalBtnHTML = saveBtn.innerHTML;
-            
-            saveBtn.disabled = true;
-            saveBtn.innerHTML = '<span class="loading"></span><span>저장 중...</span>';
+            // 저장 중 표시를 위해 입력 필드 비활성화
+            const originalValue = inputElement.value;
+            inputElement.disabled = true;
+            inputElement.style.opacity = '0.6';
+            inputElement.placeholder = '저장 중...';
 
             try {
-                const response = await fetch(`${API_BASE_URL}/${currentMemoId}`, {
+                const response = await fetch(`${API_BASE_URL}/${id}`, {
                     method: 'PATCH',
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ memo })
+                    body: JSON.stringify({ memo: memoValue })
                 });
 
                 if (!response.ok) {
@@ -1374,33 +1139,42 @@
                 const result = await response.json();
 
                 if (result.success) {
-                    // 성공 시 버튼 상태 복원 후 모달 닫고 목록 새로고침
-                    saveBtn.disabled = false;
-                    saveBtn.innerHTML = originalBtnHTML;
-                    closeMemoModal();
-                    loadInquiries();
+                    // 성공 시 입력 필드 활성화 및 값 업데이트
+                    inputElement.disabled = false;
+                    inputElement.style.opacity = '1';
+                    inputElement.value = memoValue;
+                    inputElement.placeholder = '메모 입력...';
+                    
+                    // 잠깐 성공 표시
+                    inputElement.style.borderColor = '#4caf50';
+                    setTimeout(() => {
+                        inputElement.style.borderColor = '#e0e0e0';
+                    }, 1000);
                 } else {
-                    alert('메모 저장에 실패했습니다: ' + (result.error || '알 수 없는 오류'));
-                    saveBtn.disabled = false;
-                    saveBtn.innerHTML = originalBtnHTML;
+                    // 실패 시 원래 값으로 복원
+                    inputElement.value = originalValue;
+                    inputElement.disabled = false;
+                    inputElement.style.opacity = '1';
+                    inputElement.placeholder = '메모 입력...';
+                    inputElement.style.borderColor = '#ff4444';
+                    setTimeout(() => {
+                        inputElement.style.borderColor = '#e0e0e0';
+                    }, 2000);
+                    console.error('메모 저장 실패:', result.error);
                 }
             } catch (error) {
                 console.error('Error saving memo:', error);
-                alert('메모 저장 중 오류가 발생했습니다: ' + error.message);
-                saveBtn.disabled = false;
-                saveBtn.innerHTML = originalBtnHTML;
+                // 에러 시 원래 값으로 복원
+                inputElement.value = originalValue;
+                inputElement.disabled = false;
+                inputElement.style.opacity = '1';
+                inputElement.placeholder = '메모 입력...';
+                inputElement.style.borderColor = '#ff4444';
+                setTimeout(() => {
+                    inputElement.style.borderColor = '#e0e0e0';
+                }, 2000);
             }
         }
-
-        // ESC 키로 모달 닫기
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') {
-                const modal = document.getElementById('memoModal');
-                if (modal.classList.contains('active')) {
-                    closeMemoModal();
-                }
-            }
-        });
 
         async function deleteInquiry(id) {
             if (!confirm('정말 삭제하시겠습니까?')) {
