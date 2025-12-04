@@ -58,6 +58,17 @@ export async function onRequestGet(context: any) {
 export async function onRequestPatch(context: any) {
   const { request, env, params } = context;
   
+  // CORS preflight 처리
+  if (request.method === 'OPTIONS') {
+    return new Response(null, {
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, POST, PATCH, DELETE, OPTIONS',
+        'Access-Control-Allow-Headers': 'Content-Type'
+      }
+    });
+  }
+  
   try {
     const id = params.id;
     const body = await request.json();
@@ -78,7 +89,9 @@ export async function onRequestPatch(context: any) {
           status: 404,
           headers: {
             'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*'
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET, POST, PATCH, DELETE, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type'
           }
         }
       );
@@ -97,7 +110,9 @@ export async function onRequestPatch(context: any) {
       {
         headers: {
           'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*'
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET, POST, PATCH, DELETE, OPTIONS',
+          'Access-Control-Allow-Headers': 'Content-Type'
         }
       }
     );
@@ -111,7 +126,9 @@ export async function onRequestPatch(context: any) {
         status: 500,
         headers: {
           'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*'
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET, POST, PATCH, DELETE, OPTIONS',
+          'Access-Control-Allow-Headers': 'Content-Type'
         }
       }
     );
