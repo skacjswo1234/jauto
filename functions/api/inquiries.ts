@@ -5,18 +5,25 @@ export async function onRequestGet(context: any) {
   try {
     const { searchParams } = new URL(request.url);
     const page = parseInt(searchParams.get('page') || '1');
-    const limit = parseInt(searchParams.get('limit') || '20');
+    // 기본 300건, 최대 1000건까지 조회하도록 제한
+    const rawLimit = parseInt(searchParams.get('limit') || '300');
+    const limit = Math.min(Math.max(rawLimit, 1), 1000);
     const offset = (page - 1) * limit;
+    const search = (searchParams.get('search') || '').trim();
+
+    // 검색 조건 구성
+    const whereClause = search ? 'WHERE name LIKE ? OR phone LIKE ?' : '';
+    const searchParamsArray = search ? [`%${search}%`, `%${search}%`] : [];
 
     // 전체 개수 조회
     const countResult = await env['jauto-db'].prepare(
-      'SELECT COUNT(*) as total FROM inquiries'
-    ).first();
+      `SELECT COUNT(*) as total FROM inquiries ${whereClause}`
+    ).bind(...searchParamsArray).first();
 
     // 문의 목록 조회
     const result = await env['jauto-db'].prepare(
-      'SELECT * FROM inquiries ORDER BY created_at DESC LIMIT ? OFFSET ?'
-    ).bind(limit, offset).all();
+      `SELECT * FROM inquiries ${whereClause} ORDER BY created_at DESC LIMIT ? OFFSET ?`
+    ).bind(...searchParamsArray, limit, offset).all();
 
     return new Response(
       JSON.stringify({

@@ -267,6 +267,44 @@
             -webkit-overflow-scrolling: touch;
         }
 
+        .table-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .search-group {
+            display: flex;
+            gap: 8px;
+            flex: 1;
+            min-width: 260px;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 10px 12px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 13px;
+            font-family: 'Pretendard', sans-serif;
+            transition: all 0.2s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #080e66;
+            box-shadow: 0 0 0 2px rgba(8, 14, 102, 0.08);
+        }
+
+        .actions-right {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
         .table-title {
             font-size: 16px;
             font-weight: bold;
@@ -744,10 +782,6 @@
                         <div class="header-company-name">J AUTO FINANCIAL</div>
                         <div class="header-company-subtitle">관리자 대시보드</div>
                     </div>
-                    <button class="refresh-btn" onclick="loadInquiries()" id="refreshBtn">
-                        <i class="fas fa-sync-alt"></i>
-                        <span>새로고침</span>
-                    </button>
                 </div>
                 <h1 class="page-title">문의 관리</h1>
             </div>
@@ -765,6 +799,31 @@
 
             <div class="table-container">
                 <h2 class="table-title">문의 목록</h2>
+                <div class="table-actions">
+                    <div class="search-group">
+                        <input 
+                            type="text" 
+                            id="searchInput" 
+                            class="search-input" 
+                            placeholder="이름 또는 연락처 검색 (엔터 입력 가능)"
+                            onkeypress="if(event.key==='Enter'){ handleSearch(); }"
+                        >
+                        <button class="refresh-btn" onclick="handleSearch()" id="searchBtn">
+                            <i class="fas fa-search"></i>
+                            <span>검색</span>
+                        </button>
+                    </div>
+                    <div class="actions-right">
+                        <button class="refresh-btn" onclick="downloadExcel()" id="downloadBtn">
+                            <i class="fas fa-file-excel"></i>
+                            <span>엑셀 다운로드</span>
+                        </button>
+                        <button class="refresh-btn" onclick="loadInquiries()" id="refreshBtn">
+                            <i class="fas fa-sync-alt"></i>
+                            <span>새로고침</span>
+                        </button>
+                    </div>
+                </div>
                 <div id="loading" class="loading">
                     <i class="fas fa-spinner fa-spin"></i>
                     <div>로딩 중...</div>
@@ -924,6 +983,9 @@
         let currentPage = 1;
         let totalPages = 1;
         let allInquiries = [];
+        let searchKeyword = '';
+        const PAGE_LIMIT = 300;
+        const DOWNLOAD_LIMIT = 1000;
 
         const API_BASE_URL = '/api/inquiries';
 
@@ -996,7 +1058,16 @@
             refreshBtn.innerHTML = '<span class="loading"></span><span>로딩 중...</span>';
 
             try {
-                const response = await fetch(`${API_BASE_URL}?page=${currentPage}&limit=20`);
+                const params = new URLSearchParams({
+                    page: currentPage,
+                    limit: PAGE_LIMIT
+                });
+
+                if (searchKeyword.trim()) {
+                    params.append('search', searchKeyword.trim());
+                }
+
+                const response = await fetch(`${API_BASE_URL}?${params.toString()}`);
                 const result = await response.json();
 
                 if (result.success) {
@@ -1061,6 +1132,107 @@
             }
         }
 
+        function handleSearch() {
+            const input = document.getElementById('searchInput');
+            if (input) {
+                searchKeyword = input.value || '';
+            }
+            currentPage = 1;
+            loadInquiries();
+        }
+
+        function escapeCSV(value) {
+            const strValue = value === null || value === undefined ? '' : String(value);
+            if (/[",\n\r]/.test(strValue)) {
+                return `"${strValue.replace(/"/g, '""')}"`;
+            }
+            return strValue;
+        }
+
+        function formatDateForCSV(dateString) {
+            if (!dateString) return '';
+            let date;
+            if (dateString.includes('T')) {
+                date = new Date(dateString);
+            } else {
+                date = new Date(dateString + 'Z');
+            }
+            const kstDate = new Date(date.getTime() + (9 * 60 * 60 * 1000));
+            const year = kstDate.getUTCFullYear();
+            const month = String(kstDate.getUTCMonth() + 1).padStart(2, '0');
+            const day = String(kstDate.getUTCDate()).padStart(2, '0');
+            const hours = String(kstDate.getUTCHours()).padStart(2, '0');
+            const minutes = String(kstDate.getUTCMinutes()).padStart(2, '0');
+            return `${year}-${month}-${day} ${hours}:${minutes}`;
+        }
+
+        async function downloadExcel() {
+            const downloadBtn = document.getElementById('downloadBtn');
+            if (downloadBtn) {
+                downloadBtn.disabled = true;
+                downloadBtn.innerHTML = '<span class="loading"></span><span>생성 중...</span>';
+            }
+
+            try {
+                const params = new URLSearchParams({
+                    page: 1,
+                    limit: DOWNLOAD_LIMIT
+                });
+
+                if (searchKeyword.trim()) {
+                    params.append('search', searchKeyword.trim());
+                }
+
+                const response = await fetch(`${API_BASE_URL}?${params.toString()}`);
+                const result = await response.json();
+
+                if (!result.success) {
+                    alert('엑셀 생성에 실패했습니다: ' + (result.error || '알 수 없는 오류'));
+                    return;
+                }
+
+                const rows = result.data || [];
+                if (rows.length === 0) {
+                    alert('다운로드할 문의가 없습니다.');
+                    return;
+                }
+
+                const headers = ['ID', '이름', '연락처', '희망차량', '이용방식', 'IP주소', '메모', '등록일시'];
+                const csvRows = [headers.join(',')];
+
+                rows.forEach(row => {
+                    csvRows.push([
+                        escapeCSV(row.id),
+                        escapeCSV(row.name || '-'),
+                        escapeCSV(row.phone || '-'),
+                        escapeCSV(row.car_name || '-'),
+                        escapeCSV(row.usage_type || '-'),
+                        escapeCSV(row.ip_address || '-'),
+                        escapeCSV(row.memo || ''),
+                        escapeCSV(formatDateForCSV(row.created_at))
+                    ].join(','));
+                });
+
+                const blob = new Blob(['\uFEFF' + csvRows.join('\r\n')], { type: 'text/csv;charset=utf-8;' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `inquiries_${new Date().toISOString().split('T')[0]}.csv`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            } catch (error) {
+                console.error('Excel download error:', error);
+                alert('엑셀 다운로드 중 오류가 발생했습니다.');
+            } finally {
+                if (downloadBtn) {
+                    downloadBtn.disabled = false;
+                    downloadBtn.innerHTML = '<i class="fas fa-file-excel"></i><span>엑셀 다운로드</span>';
+                }
+            }
+        }
+
         function updateStats(total, inquiries = []) {
             document.getElementById('totalCount').textContent = total.toLocaleString();
             const today = new Date().toISOString().split('T')[0];
@@ -1100,7 +1272,7 @@
 
             if (totalPages > 1) {
                 pagination.style.display = 'flex';
-                pageInfo.textContent = `${currentPage} / ${totalPages}`;
+                pageInfo.textContent = `${currentPage} / ${totalPages} (페이지당 ${PAGE_LIMIT}건)`;
                 prevBtn.disabled = currentPage === 1;
                 nextBtn.disabled = currentPage === totalPages;
             } else {
