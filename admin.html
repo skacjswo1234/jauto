@@ -263,8 +263,18 @@
             border-radius: 12px;
             padding: 15px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        /* 테이블 스크롤 전용 래퍼 */
+        .table-scroll {
+            width: 100%;
             overflow-x: auto;
+            overflow-y: auto;
             -webkit-overflow-scrolling: touch;
+            max-height: calc(100vh - 320px); /* 헤더/통계 영역 제외한 높이 */
+            border-radius: 8px;
+            border: 1px solid #f0f0f0;
         }
 
         .table-actions {
@@ -865,23 +875,25 @@
                     <i class="fas fa-inbox"></i>
                     <div>문의 내역이 없습니다.</div>
                 </div>
-                <table class="inquiries-table" id="inquiriesTable" style="display: none;">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>이름</th>
-                            <th>연락처</th>
-                            <th>희망차량</th>
-                            <th>이용방식</th>
-                            <th>IP주소</th>
-                            <th>메모</th>
-                            <th>등록일시</th>
-                            <th>관리</th>
-                        </tr>
-                    </thead>
-                    <tbody id="inquiriesBody">
-                    </tbody>
-                </table>
+                <div class="table-scroll">
+                    <table class="inquiries-table" id="inquiriesTable" style="display: none;">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>이름</th>
+                                <th>연락처</th>
+                                <th>희망차량</th>
+                                <th>이용방식</th>
+                                <th>IP주소</th>
+                                <th>메모</th>
+                                <th>등록일시</th>
+                                <th>관리</th>
+                            </tr>
+                        </thead>
+                        <tbody id="inquiriesBody">
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
             <div class="pagination" id="pagination" style="display: none;">
