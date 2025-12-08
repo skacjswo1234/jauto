@@ -321,10 +321,11 @@
 
         .inquiries-table {
             width: 100%;
-            min-width: 800px;
+            min-width: 1200px;
             border-collapse: collapse;
             font-family: 'Pretendard', sans-serif;
             font-size: 12px;
+            table-layout: fixed;
         }
 
         .inquiries-table thead {
@@ -339,6 +340,8 @@
             border-bottom: 2px solid #080e66;
             font-size: 11px;
             white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .inquiries-table td {
@@ -346,7 +349,30 @@
             border-bottom: 1px solid #e9ecef;
             font-size: 11px;
             color: #333;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
+
+        /* 컬럼 너비 고정으로 깨짐 방지 */
+        .inquiries-table th:nth-child(1),
+        .inquiries-table td:nth-child(1) { width: 60px; }
+        .inquiries-table th:nth-child(2),
+        .inquiries-table td:nth-child(2) { width: 120px; }
+        .inquiries-table th:nth-child(3),
+        .inquiries-table td:nth-child(3) { width: 140px; }
+        .inquiries-table th:nth-child(4),
+        .inquiries-table td:nth-child(4) { width: 140px; }
+        .inquiries-table th:nth-child(5),
+        .inquiries-table td:nth-child(5) { width: 90px; }
+        .inquiries-table th:nth-child(6),
+        .inquiries-table td:nth-child(6) { width: 150px; }
+        .inquiries-table th:nth-child(7),
+        .inquiries-table td:nth-child(7) { width: 240px; }
+        .inquiries-table th:nth-child(8),
+        .inquiries-table td:nth-child(8) { width: 150px; }
+        .inquiries-table th:nth-child(9),
+        .inquiries-table td:nth-child(9) { width: 80px; }
 
         .inquiries-table tbody tr:hover {
             background-color: #f8f9fa;
