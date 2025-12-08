@@ -315,6 +315,30 @@
             flex-wrap: wrap;
         }
 
+        /* 상단 액션 버튼 가독성(블루) */
+        #searchBtn,
+        #downloadBtn,
+        #refreshBtn {
+            background-color: #080e66;
+            color: #fff;
+            border: 1px solid #080e66;
+        }
+
+        #searchBtn:hover:not(:disabled),
+        #downloadBtn:hover:not(:disabled),
+        #refreshBtn:hover:not(:disabled) {
+            background-color: #060a4d;
+            border-color: #060a4d;
+        }
+
+        #searchBtn:disabled,
+        #downloadBtn:disabled,
+        #refreshBtn:disabled {
+            background-color: #ccc;
+            border-color: #ccc;
+            color: #fff;
+        }
+
         .total-info {
             font-family: 'Pretendard', sans-serif;
             color: #666;
