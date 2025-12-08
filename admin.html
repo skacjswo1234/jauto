@@ -305,6 +305,12 @@
             flex-wrap: wrap;
         }
 
+        .total-info {
+            font-family: 'Pretendard', sans-serif;
+            color: #666;
+            font-size: 13px;
+        }
+
         .table-title {
             font-size: 16px;
             font-weight: bold;
@@ -814,6 +820,7 @@
                         </button>
                     </div>
                     <div class="actions-right">
+                        <div class="total-info" id="totalInfo" aria-live="polite"></div>
                         <button class="refresh-btn" onclick="downloadExcel()" id="downloadBtn">
                             <i class="fas fa-file-excel"></i>
                             <span>엑셀 다운로드</span>
@@ -984,7 +991,7 @@
         let totalPages = 1;
         let allInquiries = [];
         let searchKeyword = '';
-        const PAGE_LIMIT = 300;
+        const PAGE_LIMIT = 1000;
         const DOWNLOAD_LIMIT = 1000;
 
         const API_BASE_URL = '/api/inquiries';
@@ -1235,6 +1242,11 @@
 
         function updateStats(total, inquiries = []) {
             document.getElementById('totalCount').textContent = total.toLocaleString();
+            const totalInfo = document.getElementById('totalInfo');
+            if (totalInfo) {
+                const searchText = searchKeyword ? `, 검색어: "${searchKeyword}"` : '';
+                totalInfo.textContent = `총 ${total.toLocaleString()}건${searchText}`;
+            }
             const today = new Date().toISOString().split('T')[0];
             const todayCount = inquiries.filter(inquiry => {
                 if (!inquiry.created_at) return false;

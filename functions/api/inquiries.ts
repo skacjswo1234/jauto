@@ -5,8 +5,8 @@ export async function onRequestGet(context: any) {
   try {
     const { searchParams } = new URL(request.url);
     const page = parseInt(searchParams.get('page') || '1');
-    // 기본 300건, 최대 1000건까지 조회하도록 제한
-    const rawLimit = parseInt(searchParams.get('limit') || '300');
+    // 기본 1000건, 최대 1000건까지 조회하도록 제한
+    const rawLimit = parseInt(searchParams.get('limit') || '1000');
     const limit = Math.min(Math.max(rawLimit, 1), 1000);
     const offset = (page - 1) * limit;
     const search = (searchParams.get('search') || '').trim();
