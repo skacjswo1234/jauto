@@ -81,11 +81,33 @@
     </script>
 </head>
 <body>
-    <!-- 첫 번째 화면 (메인 화면) -->
-    <main class="container" id="page1" role="main">
+    <!--
+    ========== 이전 첫 화면 디자인 (참고용 주석) ==========
+    배치 순서: 배너 → 헤드라인 → GV80 이미지 → 설문 안내(survey-info) → 동의 체크박스(agree-wrap) → 설문시작 버튼 → 경고문 → 회사정보
+    구조:
+    <main class="container" id="page1">
+      <div class="banner">허위견적시 200% 환불보장</div>
+      <h1 class="main-headline"><span class="line1">국내 장기렌트 최저가를</span><span class="line2">한눈에 비교해드립니다.</span></h1>
+      <div class="car-image-container"><img src="images/gv80.png" class="car-image"></div>
+      <div class="survey-info"><i class="fa-regular fa-clock clock-icon"></i><span class="survey-text">10초 설문 참여시 <strong>즉시 견적발송</strong></span></div>
+      <div class="agree-wrap"><ul><li>개인정보처리방침/제3자제공/마케팅수신 동의 + 보기 버튼</li></ul></div>
+      <button class="start-btn">설문시작</button>
+      <p class="warning-text">타인 번호도용...</p>
+      <div class="company-info"><p>업체명 / 사업자번호</p></div>
+    </main>
+    ========== /이전 디자인 ==========
+    -->
+    <!-- 첫 번째 화면 (메인 화면) - 구조 차별화 -->
+    <main class="container landing-page" id="page1" role="main">
         <!-- 상단 배너 -->
         <div class="banner" role="banner">
             허위견적시 200% 환불보장
+        </div>
+
+        <!-- 설문 참여 강조 영역 (상단으로 이동) -->
+        <div class="survey-teaser">
+            <i class="fa-regular fa-clock clock-icon"></i>
+            <span class="survey-text"><span class="survey-time">10초 설문 참여시</span> <strong>즉시 견적발송</strong></span>
         </div>
 
         <!-- 메인 헤드라인 -->
@@ -94,58 +116,57 @@
             <span class="line2">한눈에 비교해드립니다.</span>
         </h1>
 
-        <!-- GV80 이미지 -->
-        <div class="car-image-container">
-            <img src="images/gv80.png" alt="제네시스 GV80 장기렌트 견적 - J AUTO FINANCIAL" class="car-image" loading="lazy">
-        </div>
+        <!-- 차량 이미지 카드 (카드로 감싸서 구조 변경) -->
+        <section class="hero-card">
+            <div class="car-image-container">
+                <img src="images/gv80.png" alt="제네시스 GV80 장기렌트 견적 - J AUTO FINANCIAL" class="car-image" loading="lazy">
+            </div>
+        </section>
 
-        <!-- 설문 참여 안내 -->
-        <div class="survey-info">
-            <i class="fa-regular fa-clock clock-icon"></i>
-            <span class="survey-text"><span class="survey-time">10초 설문 참여시</span> <strong>즉시 견적발송</strong></span>
-        </div>
-
-        <!-- 동의 체크박스 -->
-        <div class="agree-wrap">
-            <ul>
-                <li>
-                    <label class="consent-item">
-                        <input type="checkbox" class="visually-hidden" checked>
-                        <span class="checkmark"></span>
-                        <span class="consent-text">개인정보처리방침 동의</span>
-                        <button class="view-btn" onclick="window.open('agree-1.html', '_blank', 'width=800,height=800')">보기</button>
-                    </label>
-                </li>
-                <li>
-                    <label class="consent-item">
-                        <input type="checkbox" class="visually-hidden" checked>
-                        <span class="checkmark"></span>
-                        <span class="consent-text">제 3자제공 및 활용 동의</span>
-                        <button class="view-btn" onclick="window.open('agree-2.html', '_blank', 'width=800,height=800')">보기</button>
-                    </label>
-                </li>
-                <li>
-                    <label class="consent-item">
-                        <input type="checkbox" class="visually-hidden" checked>
-                        <span class="checkmark"></span>
-                        <span class="consent-text">마케팅수신 동의</span>
-                        <button class="view-btn" onclick="window.open('agree-3.html', '_blank', 'width=800,height=800')">보기</button>
-                    </label>
-                </li>
-            </ul>
-        </div>
+        <!-- 동의 항목 카드 (섹션 제목 + 카드 레이아웃) -->
+        <section class="consent-section">
+            <h2 class="consent-section-title">동의 항목</h2>
+            <div class="agree-card">
+                <ul class="agree-list">
+                    <li class="agree-list-item">
+                        <label class="consent-item">
+                            <input type="checkbox" class="visually-hidden" checked>
+                            <span class="checkmark"></span>
+                            <span class="consent-text">개인정보처리방침 동의</span>
+                            <button type="button" class="view-btn" onclick="window.open('agree-1.html', '_blank', 'width=800,height=800')">보기</button>
+                        </label>
+                    </li>
+                    <li class="agree-list-item">
+                        <label class="consent-item">
+                            <input type="checkbox" class="visually-hidden" checked>
+                            <span class="checkmark"></span>
+                            <span class="consent-text">제 3자제공 및 활용 동의</span>
+                            <button type="button" class="view-btn" onclick="window.open('agree-2.html', '_blank', 'width=800,height=800')">보기</button>
+                        </label>
+                    </li>
+                    <li class="agree-list-item">
+                        <label class="consent-item">
+                            <input type="checkbox" class="visually-hidden" checked>
+                            <span class="checkmark"></span>
+                            <span class="consent-text">마케팅수신 동의</span>
+                            <button type="button" class="view-btn" onclick="window.open('agree-3.html', '_blank', 'width=800,height=800')">보기</button>
+                        </label>
+                    </li>
+                </ul>
+            </div>
+        </section>
 
         <!-- 설문 시작 버튼 -->
         <button class="start-btn" onclick="startSurvey()">설문시작</button>
 
-        <!-- 하단 안내 -->
-        <p class="warning-text">타인 번호도용 · 장난 신청 시 IP 추적 및 법적 처벌 대상이 됩니다.</p>
-        
-        <!-- 회사 정보 -->
-        <div class="company-info">
-            <p>업체명 : J AUTO FINANCIAL</p>
-            <p>사업자번호 : 542-87-02110</p>
-        </div>
+        <!-- 하단 푸터 (경고 + 회사정보 통합) -->
+        <footer class="landing-footer">
+            <p class="warning-text">타인 번호도용 · 장난 신청 시 IP 추적 및 법적 처벌 대상이 됩니다.</p>
+            <div class="company-info">
+                <p>업체명 : J AUTO FINANCIAL</p>
+                <p>사업자번호 : 422-87-03076</p>
+            </div>
+        </footer>
     </main>
 
     <!-- 두 번째 화면 (설문 화면) -->
@@ -187,7 +208,7 @@
         <!-- 회사 정보 -->
         <div class="company-info">
             <p>업체명 : J AUTO FINANCIAL</p>
-            <p>사업자번호 : 542-87-02110</p>
+            <p>사업자번호 : 422-87-03076</p>
         </div>
     </main>
 
@@ -230,7 +251,7 @@
         <!-- 회사 정보 -->
         <div class="company-info">
             <p>업체명 : J AUTO FINANCIAL</p>
-            <p>사업자번호 : 542-87-02110</p>
+            <p>사업자번호 : 422-87-03076</p>
         </div>
     </main>
 
@@ -273,7 +294,7 @@
         <!-- 회사 정보 -->
         <div class="company-info">
             <p>업체명 : J AUTO FINANCIAL</p>
-            <p>사업자번호 : 542-87-02110</p>
+            <p>사업자번호 : 422-87-03076</p>
         </div>
     </main>
 
@@ -322,7 +343,7 @@
         <!-- 회사 정보 -->
         <div class="company-info">
             <p>업체명 : J AUTO FINANCIAL</p>
-            <p>사업자번호 : 542-87-02110</p>
+            <p>사업자번호 : 422-87-03076</p>
         </div>
     </main>
 

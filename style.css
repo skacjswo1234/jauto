@@ -93,6 +93,116 @@ body {
     text-align: center;
 }
 
+/*
+  첫 화면 전용 레이아웃 (타사와 구조 차별화)
+  - 이전 디자인: 배너 → 헤드라인 → .car-image-container(이미지만) → .survey-info(흰색 둥근 pill) → .agree-wrap(체크리스트) → .start-btn → .warning-text → .company-info
+  - 변경 후: 배너 → .survey-teaser(카드형) → 헤드라인 → .hero-card(이미지 카드) → .consent-section + .agree-card → 버튼 → .landing-footer
+*/
+.landing-page .survey-teaser {
+    width: 100%;
+    background: linear-gradient(135deg, #f0f4ff 0%, #e8eeff 100%);
+    border: 1px solid rgba(8, 14, 102, 0.15);
+    border-radius: 12px;
+    padding: 14px 20px;
+    margin-bottom: 24px;
+    font-size: 18px;
+    color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-family: 'Pretendard', sans-serif;
+    box-shadow: 0 2px 8px rgba(8, 14, 102, 0.06);
+}
+
+.landing-page .survey-teaser .clock-icon {
+    font-size: 20px;
+    color: #080e66;
+}
+
+.landing-page .survey-teaser .survey-text strong {
+    color: #080e66;
+}
+
+.landing-page .hero-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 24px;
+    margin: 24px 0;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.landing-page .hero-card .car-image-container {
+    margin: 0;
+}
+
+.landing-page .consent-section {
+    width: 100%;
+    margin: 20px 0;
+    text-align: left;
+}
+
+.landing-page .consent-section-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 12px;
+    padding-left: 4px;
+    font-family: 'Pretendard', sans-serif;
+}
+
+.landing-page .agree-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 0;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    border: 1px solid #eee;
+    overflow: hidden;
+}
+
+.landing-page .agree-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.landing-page .agree-list-item {
+    padding: 0;
+    margin: 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.landing-page .agree-list-item:last-child {
+    border-bottom: none;
+}
+
+.landing-page .agree-list-item .consent-item {
+    display: flex;
+    align-items: center;
+    padding: 14px 16px;
+    margin: 0;
+    width: 100%;
+    justify-content: flex-start;
+    gap: 10px;
+}
+
+.landing-page .landing-footer {
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid #E0E0E0;
+}
+
+.landing-page .landing-footer .warning-text {
+    margin-bottom: 12px;
+}
+
+.landing-page .landing-footer .company-info {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: none;
+}
+
 .survey-page {
     display: flex;
     flex-direction: column;
@@ -151,7 +261,7 @@ body {
 .main-headline .line1 {
     display: block;
     font-size: 28px;
-    font-weight: bold;
+    font-weight: 800;
     color: #000000;
     margin-bottom: 8px;
     text-align: center;
@@ -160,7 +270,7 @@ body {
 .main-headline .line2 {
     display: block;
     font-size: 28px;
-    font-weight: bold;
+    font-weight: 800;
     color: #080e66;
     text-align: center;
     margin-left: 0;
@@ -170,6 +280,7 @@ body {
 #page1 .main-headline .line1,
 #page1 .main-headline .line2 {
     font-size: 48px;
+    font-weight: 800;
     text-align: center;
 }
 
@@ -716,6 +827,20 @@ body {
     
     .survey-info {
         font-size: 14px;
+    }
+
+    .landing-page .survey-teaser {
+        font-size: 15px;
+        padding: 12px 16px;
+    }
+
+    .landing-page .hero-card {
+        padding: 16px;
+        margin: 16px 0;
+    }
+
+    .landing-page .agree-list-item .consent-item {
+        padding: 12px 14px;
     }
     
     .start-btn {
