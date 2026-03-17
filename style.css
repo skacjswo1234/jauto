@@ -1,53 +1,4 @@
-@font-face {
-    font-family: 'Paperlogy';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-1Thin.woff2') format('woff2');
-    font-weight: 100;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Paperlogy';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-2ExtraLight.woff2') format('woff2');
-    font-weight: 200;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Paperlogy';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-3Light.woff2') format('woff2');
-    font-weight: 300;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Paperlogy';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-4Regular.woff2') format('woff2');
-    font-weight: 400;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Paperlogy';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-5Medium.woff2') format('woff2');
-    font-weight: 500;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Paperlogy';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-6SemiBold.woff2') format('woff2');
-    font-weight: 600;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Paperlogy';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-7Bold.woff2') format('woff2');
-    font-weight: 700;
-    font-display: swap;
-}
-
-/* Gmarket Sans 폰트 제거 - 404 에러 방지 */
+/* 폰트는 index.html 등에서 fonts.css 로 로드 */
 
 /* 전역 리셋 */
 ul, ol, li {
@@ -70,10 +21,10 @@ html, body, h1, h2, h3, h4, h5, h6, dl, dt, dd, table, thead, tbody, tfoot, tr, 
 }
 
 body {
-    font-family: 'Pretendard', sans-serif;
+    font-family: 'Paperlogy', sans-serif;
     color: #111;
     letter-spacing: -1px;
-    background: linear-gradient(#feffff, #e9edff);
+    background: #f0f0f0;
     min-height: 100vh;
     display: flex;
     justify-content: center;
@@ -86,6 +37,18 @@ body {
     width: 100%;
     text-align: center;
     display: block;
+    overflow-x: hidden;
+}
+
+/* 랜딩 페이지: 기울어진 배너가 잘리지 않도록 overflow 허용 */
+.container.landing-page {
+    overflow: visible;
+}
+
+/* 설문/동의 화면: 배너 모서리 잘림 방지 (첫화면과 동일) */
+.container.survey-page,
+.container.agree-page {
+    overflow: visible;
 }
 
 #page1 {
@@ -94,90 +57,106 @@ body {
 }
 
 /*
-  첫 화면 전용 레이아웃 (타사와 구조 차별화)
-  - 이전 디자인: 배너 → 헤드라인 → .car-image-container(이미지만) → .survey-info(흰색 둥근 pill) → .agree-wrap(체크리스트) → .start-btn → .warning-text → .company-info
-  - 변경 후: 배너 → .survey-teaser(카드형) → 헤드라인 → .hero-card(이미지 카드) → .consent-section + .agree-card → 버튼 → .landing-footer
+  첫 화면: 배너는 landing-page 밖(포지션)으로 빼서 z-index로 맨 위에 표시, 카드는 그 아래
 */
-.landing-page .survey-teaser {
+.landing-page {
+    position: relative;
+}
+
+/* 배너: flow에서 빼서 absolute, z-index로 최상단. 살짝 아래로 */
+.landing-page .banner-floating {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%) skewX(-8deg);
+    width: auto;
+    display: inline-block;
+    z-index: 10;
+    padding-left: 32px;
+    padding-right: 32px;
+}
+
+.landing-card {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
     width: 100%;
-    background: linear-gradient(135deg, #f0f4ff 0%, #e8eeff 100%);
-    border: 1px solid rgba(8, 14, 102, 0.15);
-    border-radius: 12px;
-    padding: 14px 20px;
-    margin-bottom: 24px;
-    font-size: 18px;
+    margin-bottom: 12px;
+    position: relative;
+    z-index: 1;
+    margin-top: 64px;
+}
+
+.landing-card .survey-teaser {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 14px 20px 16px;
+    margin-bottom: 0;
+    margin-top: 8px;
+    font-size: 17px;
     color: #000;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
-    font-family: 'Pretendard', sans-serif;
-    box-shadow: 0 2px 8px rgba(8, 14, 102, 0.06);
+    font-family: 'Paperlogy', sans-serif;
+    box-shadow: none;
 }
 
-.landing-page .survey-teaser .clock-icon {
-    font-size: 20px;
-    color: #080e66;
+.landing-card .survey-teaser .survey-text {
+    color: #000;
+    font-weight: 400;
+    line-height: 1.5;
 }
 
-.landing-page .survey-teaser .survey-text strong {
-    color: #080e66;
+.landing-card .main-headline {
+    padding: 0 20px;
+    margin-bottom: 8px;
+    margin-top: 12px;
 }
 
-.landing-page .hero-card {
-    background: #fff;
-    border-radius: 16px;
-    padding: 24px;
-    margin: 24px 0;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-    border: 1px solid rgba(0, 0, 0, 0.06);
+.landing-card .car-image-container {
+    margin: 10px 0;
+    padding: 0 16px;
 }
 
-.landing-page .hero-card .car-image-container {
-    margin: 0;
-}
-
-.landing-page .consent-section {
+.landing-card .consent-section {
     width: 100%;
-    margin: 20px 0;
+    margin: 0;
+    padding: 12px 20px 16px;
     text-align: left;
+    border-top: 1px solid #eee;
 }
 
-.landing-page .consent-section-title {
-    font-size: 15px;
-    font-weight: 600;
-    color: #333;
+.landing-card .consent-section-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #000;
     margin-bottom: 12px;
-    padding-left: 4px;
-    font-family: 'Pretendard', sans-serif;
+    padding-left: 0;
+    font-family: 'Paperlogy', sans-serif;
 }
 
-.landing-page .agree-card {
-    background: #fff;
-    border-radius: 12px;
-    padding: 0;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-    border: 1px solid #eee;
-    overflow: hidden;
-}
-
-.landing-page .agree-list {
+.landing-card .agree-list {
     list-style: none;
     padding: 0;
     margin: 0;
 }
 
-.landing-page .agree-list-item {
+.landing-card .agree-list-item {
     padding: 0;
     margin: 0;
     border-bottom: 1px solid #f0f0f0;
 }
 
-.landing-page .agree-list-item:last-child {
+.landing-card .agree-list-item:last-child {
     border-bottom: none;
 }
 
-.landing-page .agree-list-item .consent-item {
+.landing-card .agree-list-item .consent-item {
     display: flex;
     align-items: center;
     padding: 14px 16px;
@@ -188,19 +167,25 @@ body {
 }
 
 .landing-page .landing-footer {
-    margin-top: 24px;
-    padding-top: 20px;
+    margin-top: 12px;
+    padding-top: 12px;
+    padding-bottom: 12px;
     border-top: 1px solid #E0E0E0;
-}
-
-.landing-page .landing-footer .warning-text {
-    margin-bottom: 12px;
 }
 
 .landing-page .landing-footer .company-info {
     margin-top: 0;
     padding-top: 0;
     border-top: none;
+}
+
+.landing-page .landing-footer .warning-text {
+    margin-bottom: 8px;
+    font-size: 11px;
+}
+
+.landing-page .start-btn {
+    margin-bottom: 12px;
 }
 
 .survey-page {
@@ -222,24 +207,86 @@ body {
     }
 }
 
-/* 상단 배너 */
+/* 상단 배너 - 로열 블루 */
 .banner {
-    border-radius: 50px;
-    background: #080e66;
-    background-color: #080e66;
+    border-radius: 0;
+    background: #1545f3;
+    background-color: #1545f3;
     color: #fff;
-    padding: 10px 20px;
-    font-size: 24px;
-    display: inline-block;
-    margin-bottom: 20px;
-    font-weight: 600;
-    animation: round_txt-effect 1.5s step-end infinite;
+    padding: 14px 24px;
+    font-size: 26px;
+    display: block;
+    width: 100%;
+    margin-bottom: 0;
+    font-weight: 700;
+    text-align: center;
     font-family: 'Paperlogy', sans-serif;
+    transform: skewX(-8deg);
+    position: relative;
 }
 
-.survey-page .banner {
+.landing-page .banner-floating .banner-text,
+.banner .banner-text {
     display: inline-block;
-    align-self: flex-start;
+    transform: skewX(8deg);
+    white-space: nowrap;
+}
+
+/* 설문·동의 화면: 배너를 첫화면처럼 기울어진 직사각형, 가로 줄임 */
+.survey-page .banner,
+.agree-page .banner {
+    display: block;
+    width: max-content;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 32px;
+    padding-right: 32px;
+    border-radius: 0;
+    margin-bottom: 24px;
+}
+
+/* 설문 단계 화면(page2~5): 배너 왼쪽 정렬 */
+#page2 .banner,
+.survey-step-page .banner {
+    margin-left: 0;
+    margin-right: auto;
+}
+
+.survey-page .main-headline,
+.agree-page .main-headline {
+    margin-top: 12px;
+    line-height: 1.4;
+}
+
+.survey-page .main-headline .line1,
+.agree-page .main-headline .line1 {
+    margin-bottom: 10px;
+    border-bottom: 3px solid #1545f3;
+    padding-bottom: 4px;
+    display: inline-block;
+}
+
+.survey-page .main-headline .line2,
+.agree-page .main-headline .line2 {
+    margin-top: 12px;
+}
+
+.survey-page .main-headline .headline-check,
+.agree-page .main-headline .headline-check {
+    color: #1545f3;
+    font-size: 0.85em;
+    margin-left: 4px;
+}
+
+.agree-page .main-headline {
+    text-align: left;
+    margin-bottom: 14px;
+}
+
+.agree-page .main-headline .line1,
+.agree-page .main-headline .line2 {
+    text-align: left;
 }
 
 /* 메인 헤드라인 */
@@ -258,30 +305,198 @@ body {
     font-size: 48px;
 }
 
+/* ===== 두 번째 화면 전용 (이미지 디자인) ===== */
+.survey-step1 .survey-banner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border-radius: 12px;
+}
+.survey-step1 .survey-banner .banner-car-icon {
+    color: #fff;
+    font-size: 1.1em;
+    opacity: 0.95;
+    transform: skewX(8deg);
+    flex-shrink: 0;
+}
+.survey-page-card {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 24px 20px 20px;
+    margin: 16px 0;
+    width: 100%;
+    text-align: left;
+}
+.survey-step1 .survey-headline {
+    margin-bottom: 12px;
+}
+.survey-step1 .survey-headline .line1 {
+    display: block;
+    font-size: 26px;
+    font-weight: 800;
+    color: #000;
+    text-align: left;
+    border-bottom: 2px solid #1545f3;
+    padding-bottom: 6px;
+    margin-bottom: 8px;
+}
+.survey-step1 .survey-headline .line2 {
+    display: block;
+    font-size: 22px;
+    font-weight: 800;
+    color: #000;
+    text-align: left;
+    border-bottom: 2px solid #1545f3;
+    padding-bottom: 6px;
+}
+.survey-step1 .survey-headline .headline-check {
+    color: #1545f3;
+    margin-left: 4px;
+}
+.survey-divider {
+    height: 2px;
+    background: #1545f3;
+    margin: 16px 0 20px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.survey-divider-icon {
+    position: absolute;
+    background: #fff;
+    color: #1545f3;
+    font-size: 14px;
+    padding: 0 8px;
+}
+.survey-step1 .survey-card {
+    margin: 0 0 16px;
+    padding: 0 0 12px;
+    box-shadow: none;
+    background: transparent;
+}
+.survey-step1 .survey-question {
+    font-size: 20px;
+    font-weight: 700;
+    color: #000;
+    margin-bottom: 16px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid #1545f3;
+}
+.survey-step1 .option-buttons {
+    justify-content: flex-start;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+.survey-step1 .option-btn {
+    font-size: 22px;
+    padding: 14px 24px;
+    border-radius: 10px;
+    border: 2px solid #e0e0e0;
+    background: #fff;
+    color: #000;
+}
+.survey-step1 .option-btn.selected {
+    border-color: #1545f3;
+    background: #1545f3;
+    color: #fff;
+}
+.survey-hint {
+    font-size: 13px;
+    color: #c00;
+    margin: 0 0 20px;
+    text-align: left;
+}
+.survey-step1 .survey-company-info {
+    margin-top: 0;
+    padding-top: 12px;
+    border-top: none;
+    text-align: center;
+    font-size: 13px;
+    color: #888;
+    line-height: 1.6;
+}
+.survey-step1 .survey-company-info p {
+    margin: 2px 0;
+}
+
+/* 카드 하단: 회사정보(왼쪽) + 경고문(오른쪽 하단) */
+.survey-card-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 12px;
+    margin-top: 12px;
+    padding-top: 12px;
+}
+.survey-step1 .survey-card-bottom .survey-company-info {
+    padding-top: 0;
+    text-align: left;
+}
+.survey-disclaimer {
+    font-size: 12px;
+    color: #1545f3;
+    text-align: right;
+    margin: 0;
+    padding: 0;
+    flex-shrink: 0;
+    white-space: nowrap;
+}
+
+/* 두 번째 화면 배경 (이미지처럼 연한 그라데이션) */
+.survey-step1 {
+    background: linear-gradient(180deg, #f5f7fa 0%, #eef0f5 100%);
+    min-height: 100vh;
+    padding-bottom: 24px;
+}
+
 .main-headline .line1 {
     display: block;
     font-size: 28px;
     font-weight: 800;
-    color: #000000;
+    color: #000;
     margin-bottom: 8px;
-    text-align: center;
+    text-align: left;
+    border-bottom: 3px solid #1545f3;
+    padding-bottom: 4px;
+    display: inline-block;
 }
 
 .main-headline .line2 {
     display: block;
-    font-size: 28px;
+    font-size: 26px;
     font-weight: 800;
-    color: #080e66;
-    text-align: center;
+    color: #000;
+    text-align: left;
     margin-left: 0;
     text-indent: 0;
+    margin-top: 12px;
+}
+
+.main-headline .headline-check {
+    color: #1545f3;
+    font-size: 0.85em;
+    margin-left: 4px;
+}
+
+#page1 .main-headline {
+    text-align: left;
 }
 
 #page1 .main-headline .line1,
 #page1 .main-headline .line2 {
-    font-size: 48px;
+    font-size: 32px;
     font-weight: 800;
-    text-align: center;
+    text-align: left;
+}
+
+#page1 .main-headline .line1 {
+    font-size: 34px;
+}
+#page1 .main-headline .line2 {
+    font-size: 28px;
 }
 
 /* 차량 이미지 컨테이너 */
@@ -311,12 +526,12 @@ body {
     align-items: center;
     justify-content: center;
     gap: 8px;
-    font-family: 'Pretendard', sans-serif;
+    font-family: 'Paperlogy', sans-serif;
 }
 
 .clock-icon {
     font-size: 22px;
-    color: #080e66;
+    color: #1545f3;
     font-weight: bold;
 }
 
@@ -325,11 +540,11 @@ body {
 }
 
 .survey-time {
-    font-family: 'Pretendard', sans-serif;
+    font-family: 'Paperlogy', sans-serif;
 }
 
 .survey-text strong {
-    color: #080e66;
+    color: #1545f3;
     font-weight: bold;
 }
 
@@ -338,7 +553,7 @@ body {
     margin: 15px 0;
     width: 100%;
     text-align: center;
-    font-family: 'Pretendard', sans-serif;
+    font-family: 'Paperlogy', sans-serif;
 }
 
 .agree-wrap ul {
@@ -389,28 +604,28 @@ body {
 }
 
 .checkmark {
-    width: 15px;
-    height: 15px;
-    border: 2px solid #000000;
-    border-radius: 3px;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #1545f3;
+    border-radius: 4px;
     margin-right: 0;
     display: inline-block;
     position: relative;
     flex-shrink: 0;
-    background-color: transparent;
+    background-color: #1545f3;
 }
 
 .consent-item input[type="checkbox"]:checked + .checkmark {
-    background-color: #000000;
-    border-color: #000000;
-    background-image: url('https://land.gonplan.co.kr/resources/rent/dgwccw/input_ag_check.svg');
-    background-size: contain;
+    background-color: #1545f3;
+    border-color: #1545f3;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3E%3C/svg%3E");
+    background-size: 12px 12px;
     background-repeat: no-repeat;
     background-position: center;
 }
 
 .consent-text {
-    flex: 0 1 auto;
+    flex: 0 0 auto;
     margin-right: 0;
 }
 
@@ -425,43 +640,53 @@ body {
 }
 
 .view-btn {
-    display: block;
-    padding: 2px 8px;
-    line-height: 1.3;
-    border-radius: 3px;
-    background: #444;
-    font-size: 10px;
+    display: inline-block;
+    padding: 4px 10px;
+    line-height: 1.2;
+    border-radius: 6px;
+    background: #1545f3;
+    font-size: 11px;
     color: #fff;
     border: none;
     cursor: pointer;
-    margin-left: 0;
+    margin-left: 6px;
     flex-shrink: 0;
+    font-weight: 500;
 }
 
 .view-btn:hover {
-    background-color: #333;
+    background-color: #0f34c4;
 }
 
-/* 설문 시작 버튼 */
+/* 설문 시작 버튼 - 로열 블루, 플레이 아이콘 */
 .start-btn {
     width: 100%;
-    background: #080e66;
-    color: white;
+    background: #1545f3;
+    color: #fff;
     font-size: 20px;
-    font-weight: bold;
+    font-weight: 700;
     padding: 18px 30px;
     border: none;
     border-radius: 12px;
     cursor: pointer;
-    box-shadow: 0 4px 15px rgba(8, 14, 102, 0.4);
+    box-shadow: 0 4px 12px rgba(21, 69, 243, 0.35);
     margin-bottom: 20px;
     transition: transform 0.2s, box-shadow 0.2s;
     font-family: 'Paperlogy', sans-serif;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.start-btn-icon {
+    font-size: 14px;
+    opacity: 0.95;
 }
 
 .start-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(8, 14, 102, 0.5);
+    box-shadow: 0 6px 20px rgba(21, 69, 243, 0.45);
 }
 
 .start-btn:active {
@@ -518,7 +743,7 @@ body {
     font-weight: 600;
     margin-top: 10px;
     width: auto;
-    font-family: 'Pretendard', sans-serif;
+    font-family: 'Paperlogy', sans-serif;
     margin-left: 0;
     padding-left: 10px;
 }
@@ -532,6 +757,152 @@ body {
     font-size: 18px;
     color: #fff;
     margin-right: 8px;
+}
+
+/* 두 번째 화면 전용: 파란 게이지 + car.png */
+.progress-gauge {
+    width: 100%;
+    margin: 20px 0;
+    padding-top: 34px; /* car 이미지가 게이지 위에 올라갈 공간 */
+}
+.progress-gauge-track {
+    width: 100%;
+    height: 10px;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    position: relative;
+    overflow: visible;
+}
+.progress-gauge-fill {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: var(--progress, 20%);
+    height: 100%;
+    background-color: #1545f3;
+    border-radius: 5px;
+    transition: width 0.3s ease;
+}
+.progress-gauge-car {
+    position: absolute;
+    bottom: 100%;
+    margin-bottom: -4px;
+    left: var(--progress, 20%);
+    transform: translateX(calc(-50% - 24px));
+    height: 28px;
+    width: auto;
+    object-fit: contain;
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* 두 번째 화면: 헤드라인~회사정보 둥근 카드 (첫 화면처럼) */
+#page2 .page2-card-wrap,
+.survey-step-page .page2-card-wrap {
+    position: relative;
+    width: 100%;
+}
+#page2 .page2-card-wrap .page2-card-car,
+.survey-step-page .page2-card-wrap .page2-card-car {
+    position: absolute;
+    top: -40px;
+    right: 128px;
+    height: 48px;
+    width: auto;
+    object-fit: contain;
+    pointer-events: none;
+    z-index: 5;
+}
+#page2 .page2-card,
+.survey-step-page .page2-card {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    max-width: 468px;
+    width: 100%;
+    margin: 0 auto 12px;
+    padding: 32px 24px 32px;
+}
+#page2 .page2-card .main-headline,
+.survey-step-page .page2-card .main-headline {
+    padding: 0;
+    margin-bottom: 28px;
+    line-height: 1.65;
+}
+#page2 .page2-card .main-headline .line1,
+.survey-step-page .page2-card .main-headline .line1 {
+    font-size: 36px;
+    margin-bottom: 18px;
+}
+#page2 .page2-card .main-headline .line2,
+.survey-step-page .page2-card .main-headline .line2 {
+    font-size: 30px;
+    margin-top: 20px;
+    line-height: 1.5;
+}
+#page2 .page2-card .progress-gauge,
+.survey-step-page .page2-card .progress-gauge {
+    margin: 28px 0 32px;
+    padding-top: 34px;
+}
+#page2 .page2-card .survey-card,
+.survey-step-page .page2-card .survey-card {
+    margin-bottom: 32px;
+    padding: 0;
+    background: none;
+    border-radius: 0;
+    box-shadow: none;
+}
+#page2 .page2-card .survey-card .question-text,
+.survey-step-page .page2-card .survey-card .question-text {
+    margin-bottom: 24px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #1545f3;
+    line-height: 1.65;
+    font-size: 28px;
+    text-align: center;
+}
+#page2 .page2-card .option-buttons,
+.survey-step-page .page2-card .option-buttons {
+    justify-content: center;
+    max-width: 320px;
+    margin: 0 auto;
+}
+#page2 .page2-card .option-buttons .option-btn,
+.survey-step-page .page2-card .option-buttons .option-btn {
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 10px 16px;
+    font-size: 28px;
+}
+#page2 .page2-card .company-info,
+.survey-step-page .page2-card .company-info {
+    margin: 0;
+    padding-top: 28px;
+    border-top: 1px solid #eee;
+    font-size: 13px;
+    color: #666;
+    line-height: 1.9;
+}
+#page2 .page2-card .company-info p,
+.survey-step-page .page2-card .company-info p {
+    margin: 10px 0;
+}
+
+/* 설문 단계 화면: 경고문 오른쪽 + PC에서 왼쪽으로 */
+#page2 .survey-disclaimer,
+.survey-step-page .survey-disclaimer {
+    text-align: right;
+    margin-top: 16px;
+    margin-left: auto;
+    margin-right: 0;
+    padding-right: 0;
+    width: max-content;
+    max-width: 100%;
+    font-size: 15px;
+    font-weight: 600;
+    color: #1545f3;
+    transform: translateX(-45%);
 }
 
 .progress-section {
@@ -575,7 +946,7 @@ body {
 .progress-text {
     font-size: 16px;
     color: #333333;
-    font-family: 'Pretendard', sans-serif;
+    font-family: 'Paperlogy', sans-serif;
     font-weight: bold;
     white-space: nowrap;
     position: relative;
@@ -597,7 +968,7 @@ body {
     font-weight: bold;
     color: #000;
     margin-bottom: 20px;
-    font-family: 'Pretendard', sans-serif;
+    font-family: 'Paperlogy', sans-serif;
 }
 
 .option-buttons {
@@ -616,19 +987,19 @@ body {
     color: #000;
     cursor: pointer;
     transition: all 0.3s ease;
-    font-family: 'Pretendard', sans-serif;
+    font-family: 'Paperlogy', sans-serif;
     font-weight: 500;
 }
 
 .option-btn:hover {
-    border-color: #080e66;
+    border-color: #1545f3;
     background-color: #F5F8FF;
-    color: #080e66;
+    color: #1545f3;
 }
 
 .option-btn.selected {
-    border-color: #080e66;
-    background-color: #080e66;
+    border-color: #1545f3;
+    background-color: #1545f3;
     color: #fff;
 }
 
@@ -643,14 +1014,14 @@ body {
     border-radius: 8px;
     font-size: 18px;
     color: #000;
-    font-family: 'Pretendard', sans-serif;
+    font-family: 'Paperlogy', sans-serif;
     transition: all 0.3s ease;
     box-sizing: border-box;
 }
 
 .car-input:focus {
     outline: none;
-    border-color: #080e66;
+    border-color: #1545f3;
     background-color: #F5F8FF;
 }
 
@@ -661,7 +1032,7 @@ body {
 .next-btn {
     width: 100%;
     padding: 18px 30px;
-    background-color: #080e66;
+    background-color: #1545f3;
     color: #fff;
     border: none;
     border-radius: 8px;
@@ -669,13 +1040,13 @@ body {
     font-weight: bold;
     cursor: pointer;
     transition: all 0.3s ease;
-    font-family: 'Pretendard', sans-serif;
+    font-family: 'Paperlogy', sans-serif;
 }
 
 .next-btn:hover {
-    background-color: #060a4d;
+    background-color: #0f34c4;
     transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(8, 14, 102, 0.3);
+    box-shadow: 0 4px 10px rgba(21, 69, 243, 0.3);
 }
 
 .next-btn:active {
@@ -699,21 +1070,21 @@ body {
 }
 
 .phone-input-container:focus-within {
-    border-color: #080e66;
+    border-color: #1545f3;
     background-color: #F5F8FF;
 }
 
 .phone-prefix {
     font-size: 18px;
     color: #666666;
-    font-family: 'Pretendard', sans-serif;
+    font-family: 'Paperlogy', sans-serif;
     font-weight: 500;
 }
 
 .phone-separator {
     font-size: 18px;
     color: #666666;
-    font-family: 'Pretendard', sans-serif;
+    font-family: 'Paperlogy', sans-serif;
     margin: 0 4px;
 }
 
@@ -725,7 +1096,7 @@ body {
     background: transparent;
     font-size: 18px;
     color: #000;
-    font-family: 'Pretendard', sans-serif;
+    font-family: 'Paperlogy', sans-serif;
     text-align: center;
     outline: none;
 }
@@ -736,6 +1107,25 @@ body {
 
 /* 반응형 디자인 */
 @media (max-width: 480px) {
+    /* 모바일: 랜딩 카드 좌우 조금 더 넓게 */
+    .container.landing-page {
+        margin-left: -6px;
+        margin-right: -6px;
+        width: calc(100% + 12px);
+        max-width: calc(100% + 12px);
+    }
+
+    /* 모바일: 배너 글자·가로 축소, 텍스트 한 줄, 살짝 아래로 */
+    .landing-page .banner-floating {
+        top: 28px;
+        font-size: 18px;
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+    .landing-page .banner-floating .banner-text {
+        white-space: nowrap;
+    }
+
     .main-headline .line1,
     .main-headline .line2 {
         font-size: 24px;
@@ -744,13 +1134,13 @@ body {
     .main-headline {
         display: block;
         width: 100%;
-        text-align: center;
+        text-align: left;
     }
     
     .main-headline .line1 {
-        display: block;
-        width: 100%;
-        text-align: center;
+        display: inline-block;
+        width: auto;
+        text-align: left;
         margin-left: 0;
         padding-left: 0;
         text-indent: 0;
@@ -768,31 +1158,52 @@ body {
         white-space: normal;
     }
     
+    /* 랜딩 페이지 헤드라인: 모바일에서 왼쪽 여백으로 텍스트 살짝 오른쪽 */
+    #page1 .main-headline,
+    .landing-card .main-headline {
+        text-align: left;
+        padding: 0 12px 0 20px;
+        margin-bottom: 20px;
+    }
+    
+    /* 모바일: 파란 밑줄이 텍스트 너비에만 맞게 */
     #page1 .main-headline .line1 {
-        font-size: 32px;
-        text-align: center;
+        font-size: 28px;
+        line-height: 1.25;
+        text-align: left;
         margin-left: 0;
         padding-left: 0;
         text-indent: 0;
-        display: block;
-        width: 100%;
+        display: inline-block;
+        width: auto;
         white-space: nowrap;
     }
     
     #page1 .main-headline .line2 {
-        font-size: 32px;
-        text-align: center;
+        font-size: 24px;
+        line-height: 1.35;
+        text-align: left;
         margin-left: 0;
         padding-left: 0;
         text-indent: 0;
         display: block;
         width: 100%;
-        white-space: nowrap;
+        white-space: normal;
+        word-break: keep-all;
     }
     
+    #page1 .main-headline .headline-check {
+        display: inline;
+    }
+    
+    /* 설문 화면 모바일: 첫화면처럼 헤드라인 왼쪽 정렬 */
+    .survey-page .main-headline {
+        text-align: left;
+        padding: 0 12px 0 20px;
+    }
     .survey-page .main-headline .line1 {
         font-size: 32px;
-        text-align: center;
+        text-align: left;
         margin-left: 0;
         padding-left: 0;
         text-indent: 0;
@@ -800,25 +1211,96 @@ body {
         width: 100%;
         white-space: nowrap;
     }
-    
     .survey-page .main-headline .line2 {
         font-size: 32px;
-        text-align: center;
+        text-align: left;
         margin-left: 0;
         padding-left: 0;
         text-indent: 0;
         display: block;
         width: 100%;
+        white-space: normal;
+    }
+    /* 동의 화면 모바일: 첫화면처럼 헤드라인 왼쪽 정렬 */
+    .agree-page .main-headline {
+        text-align: left;
+        padding: 0 12px 0 20px;
+    }
+    .agree-page .main-headline .line1,
+    .agree-page .main-headline .line2 {
+        text-align: left;
+    }
+
+    /* 설문 단계 화면 모바일: 첫 화면과 동일한 텍스트 크기 */
+    #page2 .banner,
+    #page2 .banner .banner-text,
+    .survey-step-page .banner,
+    .survey-step-page .banner .banner-text {
+        font-size: 22px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    #page2 .page2-card .main-headline .line1,
+    .survey-step-page .page2-card .main-headline .line1 {
+        font-size: 28px;
+        line-height: 1.25;
+        display: inline-block;
+        width: auto;
+    }
+    #page2 .page2-card .main-headline .line2,
+    .survey-step-page .page2-card .main-headline .line2 {
+        font-size: 24px;
+        line-height: 1.35;
         white-space: nowrap;
+    }
+    #page2 .page2-card .survey-card .question-text,
+    .survey-step-page .page2-card .survey-card .question-text {
+        font-size: 20px;
+    }
+    #page2 .page2-card .option-buttons,
+    .survey-step-page .page2-card .option-buttons {
+        max-width: 260px;
+    }
+    #page2 .page2-card .option-buttons .option-btn,
+    .survey-step-page .page2-card .option-buttons .option-btn {
+        font-size: 22px;
+        padding: 12px 18px;
+    }
+    #page2 .survey-disclaimer,
+    .survey-step-page .survey-disclaimer {
+        font-size: 14px;
+        margin-right: 0;
+        transform: none;
+    }
+    /* 모바일: CAR 이미지 오른쪽에 유지 (PC만 왼쪽으로 이동) */
+    #page2 .page2-card-wrap .page2-card-car,
+    .survey-step-page .page2-card-wrap .page2-card-car {
+        right: 8px;
+    }
+
+    /* 두 번째 화면 모바일 (기존 survey-step1) */
+    .survey-step1 .survey-page-card {
+        padding: 20px 16px 16px;
+    }
+    .survey-step1 .survey-headline .line1 {
+        font-size: 22px;
+    }
+    .survey-step1 .survey-headline .line2 {
+        font-size: 18px;
+    }
+    .survey-step1 .survey-question {
+        font-size: 17px;
+    }
+    .survey-step1 .option-btn {
+        font-size: 18px;
+        padding: 12px 18px;
     }
     
     .main-headline .line2 {
-        text-align: center;
         margin-left: 0;
         padding-left: 0;
         text-indent: 0;
         font-size: 28px;
-        white-space: nowrap;
     }
     
     .car-image {
@@ -829,17 +1311,21 @@ body {
         font-size: 14px;
     }
 
-    .landing-page .survey-teaser {
+    .landing-card .survey-teaser {
         font-size: 15px;
         padding: 12px 16px;
     }
 
-    .landing-page .hero-card {
-        padding: 16px;
-        margin: 16px 0;
+    .landing-card .car-image-container {
+        margin: 12px 0;
+        padding: 0 12px;
     }
 
-    .landing-page .agree-list-item .consent-item {
+    .landing-card .consent-section {
+        padding: 12px 16px 16px;
+    }
+
+    .landing-card .agree-list-item .consent-item {
         padding: 12px 14px;
     }
     
@@ -904,11 +1390,16 @@ body {
         text-align: center;
     }
     
-    .survey-page .banner {
+    .survey-page .banner,
+    .agree-page .banner {
         display: block;
+        width: max-content;
+        max-width: calc(100% - 24px);
         margin-left: auto;
         margin-right: auto;
-        text-align: center;
+        padding-left: 20px;
+        padding-right: 20px;
+        margin-bottom: 20px;
     }
     
     .car-input {
@@ -919,43 +1410,104 @@ body {
 
 @media (max-width: 358px) {
     .main-headline {
-        text-align: center;
+        text-align: left;
+    }
+
+    /* 아주 작은 화면: 배너 더 축소, 한 줄 유지, 살짝 아래로 */
+    .landing-page .banner-floating {
+        top: 30px;
+        font-size: 16px;
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+    
+    /* 아주 작은 화면: 랜딩 헤드라인 글자 크기 축소, 좌측 여백 유지 */
+    #page1 .main-headline {
+        padding: 0 10px 0 16px;
+        margin-bottom: 16px;
     }
     
     #page1 .main-headline .line1 {
-        font-size: 28px;
-        text-align: center;
+        font-size: 24px;
+        line-height: 1.3;
+        text-align: left;
         white-space: nowrap;
+        display: inline-block;
+        width: auto;
     }
     
     #page1 .main-headline .line2 {
-        font-size: 28px;
-        text-align: center;
-        white-space: nowrap;
+        font-size: 20px;
+        line-height: 1.4;
+        text-align: left;
+        white-space: normal;
+        word-break: keep-all;
     }
     
     .survey-page .main-headline .line1 {
         font-size: 28px;
-        text-align: center;
+        text-align: left;
         white-space: nowrap;
     }
-    
     .survey-page .main-headline .line2 {
         font-size: 28px;
-        text-align: center;
+        text-align: left;
+        white-space: normal;
+    }
+    /* 설문 단계 화면 아주 작은 해상도: 첫 화면과 동일 텍스트 크기 */
+    #page2 .banner,
+    #page2 .banner .banner-text,
+    .survey-step-page .banner,
+    .survey-step-page .banner .banner-text {
+        font-size: 16px;
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+    #page2 .page2-card .main-headline .line1,
+    .survey-step-page .page2-card .main-headline .line1 {
+        font-size: 24px;
+        line-height: 1.3;
+        display: inline-block;
+        width: auto;
+    }
+    #page2 .page2-card .main-headline .line2,
+    .survey-step-page .page2-card .main-headline .line2 {
+        font-size: 20px;
+        line-height: 1.4;
         white-space: nowrap;
+    }
+    #page2 .page2-card .survey-card .question-text,
+    .survey-step-page .page2-card .survey-card .question-text {
+        font-size: 18px;
+    }
+    #page2 .page2-card .option-buttons,
+    .survey-step-page .page2-card .option-buttons {
+        max-width: 240px;
+    }
+    #page2 .page2-card .option-buttons .option-btn,
+    .survey-step-page .page2-card .option-buttons .option-btn {
+        font-size: 18px;
+        padding: 10px 14px;
+    }
+    #page2 .page2-card-wrap .page2-card-car,
+    .survey-step-page .page2-card-wrap .page2-card-car {
+        right: 8px;
+    }
+    .agree-page .main-headline .line1,
+    .agree-page .main-headline .line2 {
+        text-align: left;
     }
     
     .main-headline .line1 {
         font-size: 26px;
-        text-align: center;
+        text-align: left;
         white-space: nowrap;
     }
     
     .main-headline .line2 {
         font-size: 26px;
-        text-align: center;
-        white-space: nowrap;
+        text-align: left;
+        white-space: normal;
     }
     
     .phone-input-container {
@@ -1007,7 +1559,7 @@ body {
     width: 80px;
     height: 80px;
     border-radius: 50%;
-    background-color: #080e66;
+    background-color: #1545f3;
     color: #fff;
     font-size: 50px;
     display: flex;
@@ -1020,9 +1572,9 @@ body {
 .modal-title {
     font-size: 24px;
     font-weight: bold;
-    color: #080e66;
+    color: #1545f3;
     margin-bottom: 15px;
-    font-family: 'Pretendard', sans-serif;
+    font-family: 'Paperlogy', sans-serif;
 }
 
 .modal-message {
@@ -1030,13 +1582,13 @@ body {
     color: #333;
     margin-bottom: 30px;
     line-height: 1.6;
-    font-family: 'Pretendard', sans-serif;
+    font-family: 'Paperlogy', sans-serif;
 }
 
 .modal-btn {
     width: 100%;
     padding: 16px 30px;
-    background-color: #080e66;
+    background-color: #1545f3;
     color: #fff;
     border: none;
     border-radius: 8px;
@@ -1044,13 +1596,13 @@ body {
     font-weight: bold;
     cursor: pointer;
     transition: all 0.3s ease;
-    font-family: 'Pretendard', sans-serif;
+    font-family: 'Paperlogy', sans-serif;
 }
 
 .modal-btn:hover {
-    background-color: #060a4d;
+    background-color: #0f34c4;
     transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(8, 14, 102, 0.3);
+    box-shadow: 0 4px 10px rgba(21, 69, 243, 0.3);
 }
 
 .modal-btn:active {
