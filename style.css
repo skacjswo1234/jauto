@@ -623,7 +623,7 @@ body {
     font-size: 34px;
 }
 #page1 .main-headline .line2 {
-    font-size: 28px;
+    font-size: 26px;
 }
 
 /* 차량 이미지 컨테이너 */
@@ -1426,7 +1426,7 @@ body {
     }
     
     #page1 .main-headline .line2 {
-        font-size: 22px;
+        font-size: 20px;
         line-height: 1.35;
         text-align: left;
         margin-left: 0;
@@ -1436,6 +1436,27 @@ body {
         width: 100%;
         white-space: normal;
         word-break: keep-all;
+    }
+    /* 모바일: 2~5번째 화면 푸터(로고·면책문) 하단 중앙 + 크기 2배 */
+    #page2 .card-footer-inline,
+    #page3 .card-footer-inline,
+    #page4 .card-footer-inline,
+    #page5 .card-footer-inline {
+        justify-content: center;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    #page2 .card-footer-logo .card-footer-logo-img,
+    #page3 .card-footer-logo .card-footer-logo-img,
+    #page4 .card-footer-logo .card-footer-logo-img,
+    #page5 .card-footer-logo .card-footer-logo-img {
+        max-height: 64px;
+    }
+    #page2 .card-footer-disclaimer,
+    #page3 .card-footer-disclaimer,
+    #page4 .card-footer-disclaimer,
+    #page5 .card-footer-disclaimer {
+        font-size: 22px;
     }
     
     #page1 .main-headline .headline-check {
@@ -1771,7 +1792,7 @@ body {
     }
     
     #page1 .main-headline .line2 {
-        font-size: 18px;
+        font-size: 16px;
         line-height: 1.4;
         text-align: left;
         word-break: keep-all;
