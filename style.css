@@ -1437,26 +1437,32 @@ body {
         white-space: normal;
         word-break: keep-all;
     }
-    /* 모바일: 2~5번째 화면 푸터(로고·면책문) 하단 중앙 + 크기 2배 */
+    /* 모바일: 2~5번째 화면 푸터 - 로고 위, 면책문 아래(줄바꿈) + 한눈에 보이게 크기 축소 */
     #page2 .card-footer-inline,
     #page3 .card-footer-inline,
     #page4 .card-footer-inline,
     #page5 .card-footer-inline {
+        flex-direction: column;
+        align-items: center;
         justify-content: center;
         margin-left: auto;
         margin-right: auto;
+        gap: 8px;
     }
     #page2 .card-footer-logo .card-footer-logo-img,
     #page3 .card-footer-logo .card-footer-logo-img,
     #page4 .card-footer-logo .card-footer-logo-img,
     #page5 .card-footer-logo .card-footer-logo-img {
-        max-height: 64px;
+        max-height: 48px;
     }
     #page2 .card-footer-disclaimer,
     #page3 .card-footer-disclaimer,
     #page4 .card-footer-disclaimer,
     #page5 .card-footer-disclaimer {
-        font-size: 22px;
+        font-size: 12px;
+        text-align: center;
+        white-space: normal;
+        line-height: 1.35;
     }
     
     #page1 .main-headline .headline-check {
