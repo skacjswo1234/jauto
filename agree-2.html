@@ -87,7 +87,50 @@
             transform: translateY(-2px);
             box-shadow: 0 4px 10px rgba(21, 69, 243, 0.3);
         }
+        .agree-page .company-info,
+        .agree-page footer.company-info {
+            color: #fff;
+            background-color: #1545f3;
+            padding: 20px;
+            margin-top: 24px;
+        }
+        .agree-page .company-info p {
+            color: #fff;
+        }
+        .agree-headline-wrap {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        .agree-headline-data-wrap {
+            flex-shrink: 0;
+            width: 72px;
+            max-width: 18%;
+        }
+        .agree-headline-data-img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: contain;
+        }
+        .agree-headline-wrap .main-headline {
+            text-align: left;
+            margin: 0;
+        }
         @media (max-width: 480px) {
+            .agree-headline-wrap {
+                flex-direction: column;
+                gap: 12px;
+            }
+            .agree-headline-data-wrap {
+                width: 52px;
+                max-width: 18%;
+            }
+            .agree-headline-wrap .main-headline {
+                text-align: left;
+            }
             .agreement-container {
                 padding: 10px;
             }
@@ -129,10 +172,15 @@
     <div class="container agree-page">
         <div class="banner"><span class="banner-text">견적서 가격 변동시 즉시환불!</span></div>
 
-        <h1 class="main-headline">
-            <span class="line1">신차 장기렌트 최저가</span>
-            <span class="line2">이곳에서 한눈에, 가장 합리적으로! <i class="fa-solid fa-check headline-check" aria-hidden="true"></i></span>
-        </h1>
+        <div class="agree-headline-wrap">
+            <div class="agree-headline-data-wrap">
+                <img src="data.png" alt="" class="agree-headline-data-img" loading="lazy">
+            </div>
+            <h1 class="main-headline">
+                <span class="line1">신차 장기렌트 최저가</span>
+                <span class="line2">이곳에서 한눈에, 가장 합리적으로! <i class="fa-solid fa-check headline-check" aria-hidden="true"></i></span>
+            </h1>
+        </div>
 
         <div class="agreement-container">
             <article class="agreement-content">

@@ -24,7 +24,8 @@ body {
     font-family: 'Paperlogy', sans-serif;
     color: #111;
     letter-spacing: -1px;
-    background: #f0f0f0;
+    /* 전체 화면 배경: 상단 50% 연회색, 하단 50% 파란색 */
+    background: linear-gradient(180deg, #f0f0f0 0%, #f0f0f0 50%, #1545f3 50%, #1545f3 100%);
     min-height: 100vh;
     display: flex;
     justify-content: center;
@@ -43,6 +44,7 @@ body {
 /* 랜딩 페이지: 기울어진 배너가 잘리지 않도록 overflow 허용 */
 .container.landing-page {
     overflow: visible;
+    min-height: 100vh;
 }
 
 /* 설문/동의 화면: 배너 모서리 잘림 방지 (첫화면과 동일) */
@@ -80,7 +82,7 @@ body {
     background: #fff;
     border-radius: 16px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
+    overflow: visible;
     width: 100%;
     margin-bottom: 12px;
     position: relative;
@@ -110,6 +112,35 @@ body {
     color: #000;
     font-weight: 400;
     line-height: 1.5;
+}
+
+/* 첫 화면: 헤드라인 + data 이미지 가로 배치 (왼쪽 이미지, 오른쪽 텍스트) */
+.landing-card .headline-with-image {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 0 16px 0 12px;
+    margin-top: 12px;
+    margin-bottom: 4px;
+    margin-left: -42px;
+    text-align: left;
+}
+.landing-card .headline-data-wrap {
+    flex-shrink: 0;
+    width: 120px;
+    max-width: 32%;
+    margin-left: -28px;
+}
+.landing-card .headline-data-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+}
+.landing-card .headline-with-image .main-headline {
+    flex: 1;
+    margin: 0 0 8px 0;
+    padding: 0 0 0 8px;
 }
 
 .landing-card .main-headline {
@@ -184,8 +215,47 @@ body {
     font-size: 11px;
 }
 
-.landing-page .start-btn {
+/* 첫 화면: 설문시작 버튼 행 (왼쪽 로고, 오른쪽 버튼 절반) */
+.landing-page .start-btn-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
     margin-bottom: 12px;
+}
+.landing-page .start-btn-logo-wrap {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    min-width: 0;
+}
+.landing-page .start-btn-logo {
+    max-height: 52px;
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
+}
+.landing-page .start-btn-row .start-btn {
+    flex: 0 0 50%;
+    width: 50%;
+    max-width: 50%;
+    margin-bottom: 0;
+    background: #fff;
+    color: #1545f3;
+    border: 2px solid #1545f3;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+.landing-page .start-btn-row .start-btn .start-btn-icon {
+    color: #1545f3;
+}
+.landing-page .start-btn-row .start-btn:hover {
+    background: #f5f8ff;
+    color: #1545f3;
+    box-shadow: 0 4px 12px rgba(21, 69, 243, 0.25);
+}
+.landing-page .start-btn-row .start-btn:active {
+    background: #fff;
 }
 
 .survey-page {
@@ -246,11 +316,62 @@ body {
     margin-bottom: 24px;
 }
 
-/* 설문 단계 화면(page2~5): 배너 왼쪽 정렬 */
+/* 설문 단계 화면(page2~5): 배너 왼쪽 정렬, 두번째 화면 배너 위로 더 올리기 */
 #page2 .banner,
 .survey-step-page .banner {
     margin-left: 0;
     margin-right: auto;
+}
+/* 설문 단계 화면(page2~5): 기본 아래 여백 */
+#page2,
+.survey-step-page {
+    padding-top: 40px;
+    padding-bottom: 24px;
+}
+/* 3,4,5 페이지는 살짝 더 위로 (2페이지와 비슷하게 맞춤) */
+#page3,
+#page4,
+#page5 {
+    padding-top: 32px;
+}
+
+#page2 .banner.banner-page2,
+#page2 .banner,
+.survey-step-page .banner {
+    margin-top: 0;
+    margin-bottom: 12px;
+}
+/* 두번째 화면: 배너와 카드 사이 헤드라인 */
+.page2-headline-wrap {
+    margin-bottom: 20px;
+}
+/* PC: data 이미지 숨김 */
+.page2-headline-data-wrap {
+    display: none;
+}
+.page2-headline-above.main-headline {
+    text-align: left;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding: 0;
+}
+.page2-headline-above.main-headline .line1 {
+    font-size: 36px;
+    margin-bottom: 18px;
+    border-bottom: 3px solid #1545f3;
+    padding-bottom: 4px;
+    display: inline-block;
+}
+.page2-headline-above.main-headline .line2 {
+    font-size: 30px;
+    margin-top: 20px;
+    line-height: 1.5;
+    display: block;
+}
+.page2-headline-above.main-headline .headline-check {
+    color: #1545f3;
+    font-size: 0.85em;
+    margin-left: 4px;
 }
 
 .survey-page .main-headline,
@@ -481,6 +602,12 @@ body {
     margin-left: 4px;
 }
 
+/* 첫 화면: 한눈에, 합리적 파란색 강조 */
+.main-headline .headline-highlight {
+    color: #1545f3;
+    font-weight: 800;
+}
+
 #page1 .main-headline {
     text-align: left;
 }
@@ -658,13 +785,14 @@ body {
     background-color: #0f34c4;
 }
 
-/* 설문 시작 버튼 - 로열 블루, 플레이 아이콘 */
+/* 설문 시작 버튼 - Paperlogy Black(굵은 폰트), 더 굵고 선명하게 */
 .start-btn {
     width: 100%;
     background: #1545f3;
     color: #fff;
     font-size: 20px;
-    font-weight: 700;
+    font-family: 'Paperlogy', sans-serif;
+    font-weight: 900; /* Paperlogy-9Black.ttf */
     padding: 18px 30px;
     border: none;
     border-radius: 12px;
@@ -672,11 +800,15 @@ body {
     box-shadow: 0 4px 12px rgba(21, 69, 243, 0.35);
     margin-bottom: 20px;
     transition: transform 0.2s, box-shadow 0.2s;
-    font-family: 'Paperlogy', sans-serif;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    letter-spacing: 0.02em;
+    -webkit-text-stroke: 1.2px currentColor;
 }
 
 .start-btn-icon {
@@ -765,6 +897,29 @@ body {
     margin: 20px 0;
     padding-top: 34px; /* car 이미지가 게이지 위에 올라갈 공간 */
 }
+/* 진행 게이지 위: 진행률(파란색) 왼쪽 */
+.progress-gauge-header {
+    margin: 0 0 8px 0;
+    padding: 0;
+    text-align: left;
+}
+.progress-gauge-label {
+    font-size: 15px;
+    font-weight: 700;
+    color: #1545f3;
+    font-family: 'Paperlogy', sans-serif;
+}
+/* 진행 게이지 아래: (1/4) 현재 단계 표시 오른쪽 끝 */
+.progress-gauge-footer {
+    text-align: right;
+    margin-top: 6px;
+    padding: 0;
+}
+.progress-gauge-step {
+    font-size: 13px;
+    color: #1545f3;
+    font-family: 'Paperlogy', sans-serif;
+}
 .progress-gauge-track {
     width: 100%;
     height: 10px;
@@ -821,7 +976,7 @@ body {
     max-width: 468px;
     width: 100%;
     margin: 0 auto 12px;
-    padding: 32px 24px 32px;
+    padding: 12px 24px 20px;
 }
 #page2 .page2-card .main-headline,
 .survey-step-page .page2-card .main-headline {
@@ -842,12 +997,12 @@ body {
 }
 #page2 .page2-card .progress-gauge,
 .survey-step-page .page2-card .progress-gauge {
-    margin: 28px 0 32px;
+    margin: 18px 0 20px;
     padding-top: 34px;
 }
 #page2 .page2-card .survey-card,
 .survey-step-page .page2-card .survey-card {
-    margin-bottom: 32px;
+    margin-bottom: 20px;
     padding: 0;
     background: none;
     border-radius: 0;
@@ -855,8 +1010,8 @@ body {
 }
 #page2 .page2-card .survey-card .question-text,
 .survey-step-page .page2-card .survey-card .question-text {
-    margin-bottom: 24px;
-    padding-bottom: 10px;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
     border-bottom: 2px solid #1545f3;
     line-height: 1.65;
     font-size: 28px;
@@ -878,7 +1033,7 @@ body {
 #page2 .page2-card .company-info,
 .survey-step-page .page2-card .company-info {
     margin: 0;
-    padding-top: 28px;
+    padding-top: 20px;
     border-top: 1px solid #eee;
     font-size: 13px;
     color: #666;
@@ -903,6 +1058,68 @@ body {
     font-weight: 600;
     color: #1545f3;
     transform: translateX(-45%);
+}
+
+/* 설문 단계 화면 카드 하단: 좌측 로고, 우측 안내문 */
+.card-footer-inline {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-top: 12px;
+}
+/* PC: 카드 바로 아래, 로고·면책문 하단 중앙 정렬 */
+@media (min-width: 481px) {
+    #page2 .card-footer-inline,
+    #page3 .card-footer-inline,
+    #page4 .card-footer-inline,
+    #page5 .card-footer-inline {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 10px;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    #page2 .card-footer-disclaimer,
+    #page3 .card-footer-disclaimer,
+    #page4 .card-footer-disclaimer,
+    #page5 .card-footer-disclaimer {
+        flex: 0 0 auto;
+        text-align: left;
+        font-size: 22px;
+    }
+    #page2 .card-footer-logo .card-footer-logo-img,
+    #page3 .card-footer-logo .card-footer-logo-img,
+    #page4 .card-footer-logo .card-footer-logo-img,
+    #page5 .card-footer-logo .card-footer-logo-img {
+        max-height: 64px;
+    }
+    #page2 .card-footer-logo,
+    #page3 .card-footer-logo,
+    #page4 .card-footer-logo,
+    #page5 .card-footer-logo {
+        margin-right: 12px;
+    }
+}
+.card-footer-logo {
+    flex: 0 0 auto;
+}
+.card-footer-logo-img {
+    max-height: 32px;
+    width: auto;
+    display: block;
+    object-fit: contain;
+}
+.card-footer-disclaimer {
+    flex: 1 1 auto;
+    margin: 0;
+    text-align: right;
+    font-size: 11px;
+    color: #fff;
+    font-family: 'Paperlogy', sans-serif;
+    white-space: nowrap;
 }
 
 .progress-section {
@@ -1107,12 +1324,41 @@ body {
 
 /* 반응형 디자인 */
 @media (max-width: 480px) {
+    /* 모바일: 전체 화면을 약간 아래로 배치 */
+    body {
+        align-items: flex-start;
+        padding-top: 60px;
+        padding-bottom: 20px;
+    }
+
     /* 모바일: 랜딩 카드 좌우 조금 더 넓게 */
     .container.landing-page {
         margin-left: -6px;
         margin-right: -6px;
         width: calc(100% + 12px);
         max-width: calc(100% + 12px);
+    }
+
+    /* 모바일: 2~5번째 화면에서 배너+헤드라인만 위로, 카드는 아래로 */
+    #page2 .banner,
+    #page3 .banner,
+    #page4 .banner,
+    #page5 .banner {
+        margin-top: -28px;
+        margin-bottom: 8px;
+    }
+    #page2 .page2-headline-wrap,
+    #page3 .page2-headline-wrap,
+    #page4 .page2-headline-wrap,
+    #page5 .page2-headline-wrap {
+        margin-top: -10px;
+        margin-bottom: 14px;
+    }
+    #page2 .page2-card-wrap,
+    #page3 .page2-card-wrap,
+    #page4 .page2-card-wrap,
+    #page5 .page2-card-wrap {
+        margin-top: 32px;
     }
 
     /* 모바일: 배너 글자·가로 축소, 텍스트 한 줄, 살짝 아래로 */
@@ -1180,7 +1426,7 @@ body {
     }
     
     #page1 .main-headline .line2 {
-        font-size: 24px;
+        font-size: 22px;
         line-height: 1.35;
         text-align: left;
         margin-left: 0;
@@ -1231,7 +1477,7 @@ body {
         text-align: left;
     }
 
-    /* 설문 단계 화면 모바일: 첫 화면과 동일한 텍스트 크기 */
+    /* 설문 단계 화면 모바일: 배너·헤드라인 */
     #page2 .banner,
     #page2 .banner .banner-text,
     .survey-step-page .banner,
@@ -1239,6 +1485,45 @@ body {
         font-size: 22px;
         padding-left: 20px;
         padding-right: 20px;
+    }
+    /* 3·4·5번 화면 모바일: 배너 왼쪽으로 이동 */
+    #page3 .banner,
+    #page4 .banner,
+    #page5 .banner {
+        margin-left: -16px;
+    }
+    /* 2~5번 화면 모바일: 1페이지처럼 data.png 왼쪽 + 헤드라인 */
+    .page2-headline-wrap {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 16px;
+    }
+    .page2-headline-data-wrap {
+        display: block;
+        flex-shrink: 0;
+        width: 72px;
+        max-width: 24%;
+    }
+    .page2-headline-data-img {
+        width: 100%;
+        height: auto;
+        display: block;
+        object-fit: contain;
+    }
+    .page2-headline-wrap .page2-headline-above.main-headline {
+        flex: 1;
+        margin-bottom: 0;
+        padding-left: 4px;
+    }
+    /* 2~5번 화면 모바일: 신차 장기렌트~ / 이곳에서 한눈에~ 텍스트 2키워 + 한 줄 유지 */
+    .page2-headline-above.main-headline .line1 {
+        font-size: 32px;
+    }
+    .page2-headline-above.main-headline .line2 {
+        white-space: nowrap;
+        font-size: 21px;
+        line-height: 1.4;
     }
     #page2 .page2-card .main-headline .line1,
     .survey-step-page .page2-card .main-headline .line1 {
@@ -1276,6 +1561,13 @@ body {
     #page2 .page2-card-wrap .page2-card-car,
     .survey-step-page .page2-card-wrap .page2-card-car {
         right: 8px;
+    }
+    /* 모바일: 진행률 텍스트만 위로 이동 (게이지 바는 그대로) */
+    .progress-gauge .progress-gauge-header {
+        position: relative;
+        top: -24px;
+        margin-top: 0;
+        margin-bottom: 8px;
     }
 
     /* 두 번째 화면 모바일 (기존 survey-step1) */
@@ -1316,6 +1608,31 @@ body {
         padding: 12px 16px;
     }
 
+    .landing-card .headline-with-image {
+        padding: 0 12px 0 10px;
+        gap: 12px;
+        margin-left: -34px;
+    }
+    .landing-card .headline-data-wrap {
+        width: 72px;
+        max-width: 24%;
+        margin-left: 10px;
+    }
+    .landing-card .headline-with-image .main-headline {
+        padding: 0 0 0 6px;
+    }
+    /* 첫 화면 모바일: 헤드라인 한 줄 유지 (줄바꿈 없음) */
+    .landing-card .headline-with-image .main-headline .line1 {
+        white-space: nowrap;
+        display: block;
+    }
+    #page1 .landing-card .headline-with-image .main-headline .line2,
+    .landing-card .headline-with-image .main-headline .line2 {
+        white-space: nowrap;
+        display: block;
+        margin-top: 6px;
+    }
+
     .landing-card .car-image-container {
         margin: 12px 0;
         padding: 0 12px;
@@ -1330,8 +1647,14 @@ body {
     }
     
     .start-btn {
-        font-size: 18px;
+        font-size: 17px;
         padding: 16px 25px;
+        font-weight: 900;
+    }
+
+    /* 모바일: 설문 시작하기 텍스트 한 줄 유지 */
+    .start-btn span {
+        white-space: nowrap;
     }
 
     .survey-card {
@@ -1422,11 +1745,22 @@ body {
     }
     
     /* 아주 작은 화면: 랜딩 헤드라인 글자 크기 축소, 좌측 여백 유지 */
-    #page1 .main-headline {
-        padding: 0 10px 0 16px;
+    #page1 .main-headline,
+    .landing-card .headline-with-image .main-headline {
+        padding: 0 8px 0 6px;
         margin-bottom: 16px;
     }
-    
+    .landing-card .headline-with-image {
+        gap: 10px;
+        padding: 0 10px 0 8px;
+        margin-left: -26px;
+    }
+    .landing-card .headline-data-wrap {
+        width: 60px;
+        max-width: 22%;
+        margin-left: 8px;
+    }
+
     #page1 .main-headline .line1 {
         font-size: 24px;
         line-height: 1.3;
@@ -1437,11 +1771,13 @@ body {
     }
     
     #page1 .main-headline .line2 {
-        font-size: 20px;
+        font-size: 18px;
         line-height: 1.4;
         text-align: left;
-        white-space: normal;
         word-break: keep-all;
+    }
+    #page1 .landing-card .headline-with-image .main-headline .line2 {
+        white-space: nowrap;
     }
     
     .survey-page .main-headline .line1 {
@@ -1463,6 +1799,11 @@ body {
         padding-left: 12px;
         padding-right: 12px;
     }
+    #page3 .banner,
+    #page4 .banner,
+    #page5 .banner {
+        margin-left: -12px;
+    }
     #page2 .page2-card .main-headline .line1,
     .survey-step-page .page2-card .main-headline .line1 {
         font-size: 24px;
@@ -1475,6 +1816,14 @@ body {
         font-size: 20px;
         line-height: 1.4;
         white-space: nowrap;
+    }
+    /* 아주 작은 화면: 이곳에서 한눈에~ 한 줄 유지 */
+    .page2-headline-above.main-headline .line2 {
+        font-size: 16px;
+    }
+    .page2-headline-data-wrap {
+        width: 60px;
+        max-width: 22%;
     }
     #page2 .page2-card .survey-card .question-text,
     .survey-step-page .page2-card .survey-card .question-text {
@@ -1546,7 +1895,7 @@ body {
 }
 
 .modal-content {
-    background-color: #fff;
+    background-color: #1545f3;
     border-radius: 16px;
     padding: 40px 30px;
     max-width: 400px;
@@ -1559,8 +1908,8 @@ body {
     width: 80px;
     height: 80px;
     border-radius: 50%;
-    background-color: #1545f3;
-    color: #fff;
+    background-color: #fff;
+    color: #1545f3;
     font-size: 50px;
     display: flex;
     align-items: center;
@@ -1572,14 +1921,14 @@ body {
 .modal-title {
     font-size: 24px;
     font-weight: bold;
-    color: #1545f3;
+    color: #fff;
     margin-bottom: 15px;
     font-family: 'Paperlogy', sans-serif;
 }
 
 .modal-message {
     font-size: 18px;
-    color: #333;
+    color: #fff;
     margin-bottom: 30px;
     line-height: 1.6;
     font-family: 'Paperlogy', sans-serif;
@@ -1588,8 +1937,8 @@ body {
 .modal-btn {
     width: 100%;
     padding: 16px 30px;
-    background-color: #1545f3;
-    color: #fff;
+    background-color: #fff;
+    color: #1545f3;
     border: none;
     border-radius: 8px;
     font-size: 18px;
@@ -1600,9 +1949,10 @@ body {
 }
 
 .modal-btn:hover {
-    background-color: #0f34c4;
+    background-color: #e8eeff;
+    color: #1545f3;
     transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(21, 69, 243, 0.3);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
 .modal-btn:active {

@@ -109,15 +109,20 @@
                 <span class="survey-text">딱 5초만! 참여시 바로 견적 발송해드립니다</span>
             </div>
 
-            <!-- 메인 헤드라인 -->
-            <h1 class="main-headline">
-                <span class="line1">신차 장기렌트 최저가</span>
-                <span class="line2">이곳에서 한눈에, 가장 합리적으로! <i class="fa-solid fa-check headline-check"></i></span>
-            </h1>
+            <!-- 메인 헤드라인: 왼쪽 data 이미지 + 오른쪽 텍스트 -->
+            <div class="headline-with-image">
+                <div class="headline-data-wrap">
+                    <img src="data.png" alt="" class="headline-data-image" loading="lazy">
+                </div>
+                <h1 class="main-headline">
+                    <span class="line1">신차 장기렌트 최저가</span>
+                    <span class="line2">이곳에서 <span class="headline-highlight">한눈에</span>, 가장 <span class="headline-highlight">합리적</span>으로! <i class="fa-solid fa-check headline-check"></i></span>
+                </h1>
+            </div>
 
             <!-- 차량 이미지 -->
             <div class="car-image-container">
-                <img src="images/pali.png" alt="제네시스 GV80 장기렌트 견적 - J AUTO FINANCIAL" class="car-image" loading="lazy">
+                <img src="images/granger.png" alt="제네시스 GV80 장기렌트 견적 - J AUTO FINANCIAL" class="car-image" loading="lazy">
             </div>
 
             <!-- 동의 항목 (필수 동의) -->
@@ -152,38 +157,47 @@
             </section>
         </div>
 
-        <!-- 설문 시작 버튼 -->
-        <button class="start-btn" onclick="startSurvey()"><span>설문 시작하기</span> <i class="fa-solid fa-play start-btn-icon"></i></button>
-
-        <!-- 하단 푸터 (경고 + 회사정보 통합) -->
-        <footer class="landing-footer">
-            <p class="warning-text">타인 번호도용 · 장난 신청 시 IP 추적 및 법적 처벌 대상이 됩니다.</p>
-            <div class="company-info">
-                <p>업체명 : J AUTO FINANCIAL</p>
-                <p>사업자번호 : 422-87-03076</p>
+        <!-- 설문 시작 버튼 + 로고 (한 줄: 왼쪽 로고, 오른쪽 버튼 절반) -->
+        <div class="start-btn-row">
+            <div class="start-btn-logo-wrap">
+                <img src="logo.png" alt="J AUTO FINANCIAL" class="start-btn-logo" loading="lazy">
             </div>
-        </footer>
+            <button class="start-btn" onclick="startSurvey()"><span>설문 시작하기</span> <i class="fa-solid fa-play start-btn-icon"></i></button>
+        </div>
+
     </main>
 
-    <!-- 두 번째 화면 (설문 화면) - 헤드라인~회사정보를 둥근 카드로 감쌈 -->
+    <!-- 두 번째 화면 (설문 화면) - 배너 / 헤드라인(카드 위) / 카드 -->
     <main class="container survey-page survey-step-page" id="page2" style="display: none;" role="main">
         <!-- 상단 배너 -->
-        <div class="banner"><span class="banner-text">견적서 가격 변동시 즉시환불!</span></div>
+        <div class="banner banner-page2"><span class="banner-text">견적서 가격 변동시 즉시환불!</span></div>
+
+        <!-- 배너와 카드 사이 헤드라인 (모바일에서 data.png 왼쪽 배치) -->
+        <div class="page2-headline-wrap">
+            <div class="page2-headline-data-wrap">
+                <img src="data.png" alt="" class="page2-headline-data-img" loading="lazy">
+            </div>
+            <h1 class="page2-headline-above main-headline">
+                <span class="line1">신차 장기렌트 최저가</span>
+                <span class="line2">이곳에서 <span class="headline-highlight">한눈에</span>, 가장 <span class="headline-highlight">합리적</span>으로! <i class="fa-solid fa-check headline-check" aria-hidden="true"></i></span>
+            </h1>
+        </div>
 
         <!-- 카드 + 카드 밖 우측 상단 car -->
         <div class="page2-card-wrap">
             <img src="car.png" alt="" class="page2-card-car" aria-hidden="true">
             <div class="page2-card">
-            <h1 class="main-headline">
-                <span class="line1">신차 장기렌트 최저가</span>
-                <span class="line2">이곳에서 한눈에, 가장 합리적으로! <i class="fa-solid fa-check headline-check" aria-hidden="true"></i></span>
-            </h1>
-
             <!-- 진행 게이지 (질문 위) -->
             <div class="progress-gauge" style="--progress: 20%;">
+                <div class="progress-gauge-header">
+                    <span class="progress-gauge-label">진행률</span>
+                </div>
                 <div class="progress-gauge-track">
                     <div class="progress-gauge-fill"></div>
                     <img src="car.png" alt="" class="progress-gauge-car" aria-hidden="true">
+                </div>
+                <div class="progress-gauge-footer">
+                    <span class="progress-gauge-step">(1/4)</span>
                 </div>
             </div>
 
@@ -202,23 +216,39 @@
         </div>
         </div>
 
-        <p class="survey-disclaimer">※타인의 정보로 이용시 법적 처벌의 대상이 됩니다.</p>
+        <div class="card-footer-inline">
+            <div class="card-footer-logo">
+                <img src="logo.png" alt="J AUTO FINANCIAL" class="card-footer-logo-img">
+            </div>
+            <p class="card-footer-disclaimer">※타인의 정보로 이용시 법적 처벌의 대상이 됩니다.</p>
+        </div>
     </main>
 
-    <!-- 세 번째 화면 (차량명 입력) - 두 번째 화면과 동일 디자인 -->
+    <!-- 세 번째 화면 (차량명 입력) - 두 번째 화면과 동일 디자인 구조 -->
     <main class="container survey-page survey-step-page" id="page3" style="display: none;" role="main">
-        <div class="banner"><span class="banner-text">견적서 가격 변동시 즉시환불!</span></div>
+        <div class="banner banner-page2"><span class="banner-text">견적서 가격 변동시 즉시환불!</span></div>
+        <div class="page2-headline-wrap">
+            <div class="page2-headline-data-wrap">
+                <img src="data.png" alt="" class="page2-headline-data-img" loading="lazy">
+            </div>
+            <h1 class="page2-headline-above main-headline">
+                <span class="line1">신차 장기렌트 최저가</span>
+                <span class="line2">이곳에서 <span class="headline-highlight">한눈에</span>, 가장 <span class="headline-highlight">합리적</span>으로! <i class="fa-solid fa-check headline-check" aria-hidden="true"></i></span>
+            </h1>
+        </div>
         <div class="page2-card-wrap">
             <img src="car.png" alt="" class="page2-card-car" aria-hidden="true">
             <div class="page2-card">
-                <h1 class="main-headline">
-                    <span class="line1">신차 장기렌트 최저가</span>
-                    <span class="line2">이곳에서 한눈에, 가장 합리적으로! <i class="fa-solid fa-check headline-check" aria-hidden="true"></i></span>
-                </h1>
                 <div class="progress-gauge" style="--progress: 35%;">
+                    <div class="progress-gauge-header">
+                        <span class="progress-gauge-label">진행률</span>
+                    </div>
                     <div class="progress-gauge-track">
                         <div class="progress-gauge-fill"></div>
                         <img src="car.png" alt="" class="progress-gauge-car" aria-hidden="true">
+                    </div>
+                    <div class="progress-gauge-footer">
+                        <span class="progress-gauge-step">(2/4)</span>
                     </div>
                 </div>
                 <div class="survey-card">
@@ -234,23 +264,38 @@
                 </div>
             </div>
         </div>
-        <p class="survey-disclaimer">※타인의 정보로 이용시 법적 처벌의 대상이 됩니다.</p>
+        <div class="card-footer-inline">
+            <div class="card-footer-logo">
+                <img src="logo.png" alt="J AUTO FINANCIAL" class="card-footer-logo-img">
+            </div>
+            <p class="card-footer-disclaimer">※타인의 정보로 이용시 법적 처벌의 대상이 됩니다.</p>
     </main>
 
-    <!-- 네 번째 화면 (성함 입력) - 두 번째 화면과 동일 디자인 -->
+    <!-- 네 번째 화면 (성함 입력) - 두 번째 화면과 동일 디자인 구조 -->
     <main class="container survey-page survey-step-page" id="page4" style="display: none;" role="main">
-        <div class="banner"><span class="banner-text">견적서 가격 변동시 즉시환불!</span></div>
+        <div class="banner banner-page2"><span class="banner-text">견적서 가격 변동시 즉시환불!</span></div>
+        <div class="page2-headline-wrap">
+            <div class="page2-headline-data-wrap">
+                <img src="data.png" alt="" class="page2-headline-data-img" loading="lazy">
+            </div>
+            <h1 class="page2-headline-above main-headline">
+                <span class="line1">신차 장기렌트 최저가</span>
+                <span class="line2">이곳에서 <span class="headline-highlight">한눈에</span>, 가장 <span class="headline-highlight">합리적</span>으로! <i class="fa-solid fa-check headline-check" aria-hidden="true"></i></span>
+            </h1>
+        </div>
         <div class="page2-card-wrap">
             <img src="car.png" alt="" class="page2-card-car" aria-hidden="true">
             <div class="page2-card">
-                <h1 class="main-headline">
-                    <span class="line1">신차 장기렌트 최저가</span>
-                    <span class="line2">이곳에서 한눈에, 가장 합리적으로! <i class="fa-solid fa-check headline-check" aria-hidden="true"></i></span>
-                </h1>
                 <div class="progress-gauge" style="--progress: 50%;">
+                    <div class="progress-gauge-header">
+                        <span class="progress-gauge-label">진행률</span>
+                    </div>
                     <div class="progress-gauge-track">
                         <div class="progress-gauge-fill"></div>
                         <img src="car.png" alt="" class="progress-gauge-car" aria-hidden="true">
+                    </div>
+                    <div class="progress-gauge-footer">
+                        <span class="progress-gauge-step">(3/4)</span>
                     </div>
                 </div>
                 <div class="survey-card">
@@ -266,23 +311,38 @@
                 </div>
             </div>
         </div>
-        <p class="survey-disclaimer">※타인의 정보로 이용시 법적 처벌의 대상이 됩니다.</p>
+        <div class="card-footer-inline">
+            <div class="card-footer-logo">
+                <img src="logo.png" alt="J AUTO FINANCIAL" class="card-footer-logo-img">
+            </div>
+            <p class="card-footer-disclaimer">※타인의 정보로 이용시 법적 처벌의 대상이 됩니다.</p>
     </main>
 
-    <!-- 다섯 번째 화면 (연락처 입력) - 두 번째 화면과 동일 디자인 -->
+    <!-- 다섯 번째 화면 (연락처 입력) - 두 번째 화면과 동일 디자인 구조 -->
     <main class="container survey-page survey-step-page" id="page5" style="display: none;" role="main">
-        <div class="banner"><span class="banner-text">견적서 가격 변동시 즉시환불!</span></div>
+        <div class="banner banner-page2"><span class="banner-text">견적서 가격 변동시 즉시환불!</span></div>
+        <div class="page2-headline-wrap">
+            <div class="page2-headline-data-wrap">
+                <img src="data.png" alt="" class="page2-headline-data-img" loading="lazy">
+            </div>
+            <h1 class="page2-headline-above main-headline">
+                <span class="line1">신차 장기렌트 최저가</span>
+                <span class="line2">이곳에서 <span class="headline-highlight">한눈에</span>, 가장 <span class="headline-highlight">합리적</span>으로! <i class="fa-solid fa-check headline-check" aria-hidden="true"></i></span>
+            </h1>
+        </div>
         <div class="page2-card-wrap">
             <img src="car.png" alt="" class="page2-card-car" aria-hidden="true">
             <div class="page2-card">
-                <h1 class="main-headline">
-                    <span class="line1">신차 장기렌트 최저가</span>
-                    <span class="line2">이곳에서 한눈에, 가장 합리적으로! <i class="fa-solid fa-check headline-check" aria-hidden="true"></i></span>
-                </h1>
                 <div class="progress-gauge" style="--progress: 65%;">
+                    <div class="progress-gauge-header">
+                        <span class="progress-gauge-label">진행률</span>
+                    </div>
                     <div class="progress-gauge-track">
                         <div class="progress-gauge-fill"></div>
                         <img src="car.png" alt="" class="progress-gauge-car" aria-hidden="true">
+                    </div>
+                    <div class="progress-gauge-footer">
+                        <span class="progress-gauge-step">(4/4)</span>
                     </div>
                 </div>
                 <div class="survey-card">
@@ -304,7 +364,11 @@
                 </div>
             </div>
         </div>
-        <p class="survey-disclaimer">※타인의 정보로 이용시 법적 처벌의 대상이 됩니다.</p>
+        <div class="card-footer-inline">
+            <div class="card-footer-logo">
+                <img src="logo.png" alt="J AUTO FINANCIAL" class="card-footer-logo-img">
+            </div>
+            <p class="card-footer-disclaimer">※타인의 정보로 이용시 법적 처벌의 대상이 됩니다.</p>
     </main>
 
     <!-- 완료 모달 -->
