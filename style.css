@@ -190,11 +190,26 @@ body {
 .landing-card .agree-list-item .consent-item {
     display: flex;
     align-items: center;
+    flex-wrap: nowrap;
     padding: 14px 16px;
     margin: 0;
     width: 100%;
-    justify-content: flex-start;
     gap: 10px;
+    justify-content: flex-start;
+}
+
+.landing-card .agree-list-item .consent-text {
+    flex: 0 1 auto;
+    margin-right: 0;
+}
+
+.landing-card .agree-list-item .view-btn {
+    flex-shrink: 0;
+    margin-left: 0;
+}
+
+.landing-card .agree-list-item:last-child .view-btn {
+    margin-left: 31px;
 }
 
 .landing-page .landing-footer {
