@@ -71,6 +71,9 @@ function nextToStep4() {
     }, 300);
 }
 
+// 중복 제출(연타) 방지
+let isSubmittingInquiry = false;
+
 // 5번째 화면으로 이동 함수
 async function nextToStep5() {
     const phone2 = document.getElementById('phone2').value.trim();
@@ -81,8 +84,15 @@ async function nextToStep5() {
         return;
     }
     
+    if (isSubmittingInquiry) {
+        return;
+    }
+    isSubmittingInquiry = true;
+    
     const fullPhone = `010-${phone2}-${phone3}`;
     window.selectedPhone = fullPhone;
+    
+    let inquirySaved = false;
     
     // 데이터베이스에 저장
     try {
@@ -103,7 +113,9 @@ async function nextToStep5() {
 
         const result = await response.json();
         
-        if (!result.success) {
+        if (result.success) {
+            inquirySaved = true;
+        } else {
             console.error('문의 저장 실패:', result.error);
             // 저장 실패해도 사용자에게는 성공으로 보여줌 (UX 고려)
         }
@@ -127,6 +139,13 @@ async function nextToStep5() {
         window.karrotPixel.track('Lead');
     }
     // End Danggeun Market Code
+    
+    // Meta Pixel - 견적 신청이 DB에 정상 저장된 경우에만 Lead 전송
+    if (inquirySaved && typeof window.fbq === 'function') {
+        window.fbq('track', 'Lead');
+    }
+    
+    isSubmittingInquiry = false;
 }
 
 // 첫 화면으로 돌아가기
