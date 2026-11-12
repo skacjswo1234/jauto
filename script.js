@@ -89,13 +89,20 @@ function fireGoogleAdsConversion(transactionId) {
     hasFiredGoogleConversion = true;
 
     const conversionPayload = {
-        send_to: 'AW-17607080242/aAVcCK267rYdELLy2stB'
+        send_to: 'AW-17607080242/aAVcCK267rYdELLy2stB',
+        event_callback: function () {
+            console.info('[Google Ads] fin_상담신청완료 전환 전송 완료', {
+                send_to: 'AW-17607080242/aAVcCK267rYdELLy2stB',
+                transaction_id: transactionId != null ? String(transactionId) : null
+            });
+        }
     };
     // Google Ads 중복 전환 방지용 고유 ID (DB row id)
     if (transactionId != null && transactionId !== '') {
         conversionPayload.transaction_id = String(transactionId);
     }
 
+    console.info('[Google Ads] fin_상담신청완료 전환 전송 시작', conversionPayload);
     window.gtag('event', 'conversion', conversionPayload);
 }
 
