@@ -144,6 +144,13 @@ async function nextToStep5() {
     if (inquirySaved && typeof window.fbq === 'function') {
         window.fbq('track', 'Lead');
     }
+
+    // Google Ads - fin_상담신청완료 (DB 저장 성공 시 1회만 실행)
+    if (inquirySaved && typeof window.gtag === 'function') {
+        window.gtag('event', 'conversion', {
+            'send_to': 'AW-17607080242/aAVcCK267rYdELLy2stB'
+        });
+    }
     
     isSubmittingInquiry = false;
 }
