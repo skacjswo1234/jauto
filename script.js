@@ -73,6 +73,31 @@ function nextToStep4() {
 
 // 중복 제출(연타) 방지
 let isSubmittingInquiry = false;
+// Google Ads 상담신청완료 전환: 동일 제출 건 중복 전송 방지
+let hasFiredGoogleConversion = false;
+
+// Google Ads - fin_상담신청완료 (DB 저장 성공 직후 1회만)
+function fireGoogleAdsConversion(transactionId) {
+    if (hasFiredGoogleConversion) {
+        return;
+    }
+    if (typeof window.gtag !== 'function') {
+        console.warn('[Google Ads] gtag 미로드 - 전환 전송 불가');
+        return;
+    }
+
+    hasFiredGoogleConversion = true;
+
+    const conversionPayload = {
+        send_to: 'AW-17607080242/aAVcCK267rYdELLy2stB'
+    };
+    // Google Ads 중복 전환 방지용 고유 ID (DB row id)
+    if (transactionId != null && transactionId !== '') {
+        conversionPayload.transaction_id = String(transactionId);
+    }
+
+    window.gtag('event', 'conversion', conversionPayload);
+}
 
 // 5번째 화면으로 이동 함수
 async function nextToStep5() {
@@ -93,6 +118,7 @@ async function nextToStep5() {
     window.selectedPhone = fullPhone;
     
     let inquirySaved = false;
+    let inquiryId = null;
     
     // 데이터베이스에 저장
     try {
@@ -113,8 +139,9 @@ async function nextToStep5() {
 
         const result = await response.json();
         
-        if (result.success) {
+        if (response.ok && result.success) {
             inquirySaved = true;
+            inquiryId = result.data && result.data.id != null ? result.data.id : null;
         } else {
             console.error('문의 저장 실패:', result.error);
             // 저장 실패해도 사용자에게는 성공으로 보여줌 (UX 고려)
@@ -145,11 +172,10 @@ async function nextToStep5() {
         window.fbq('track', 'Lead');
     }
 
-    // Google Ads - fin_상담신청완료 (DB 저장 성공 시 1회만 실행)
-    if (inquirySaved && typeof window.gtag === 'function') {
-        window.gtag('event', 'conversion', {
-            'send_to': 'AW-17607080242/aAVcCK267rYdELLy2stB'
-        });
+    // Google Ads - fin_상담신청완료
+    // 페이지 접속/버튼 클릭이 아니라, 서버 DB 저장 성공 직후에만 실행
+    if (inquirySaved) {
+        fireGoogleAdsConversion(inquiryId);
     }
     
     isSubmittingInquiry = false;
@@ -196,6 +222,10 @@ function goToFirstPage() {
     checkboxes.forEach(checkbox => {
         checkbox.checked = true;
     });
+
+    // 다음 신규 신청을 위해 제출/전환 플래그 초기화
+    isSubmittingInquiry = false;
+    hasFiredGoogleConversion = false;
 }
 
 // 전화번호 입력 자동 포커스 이동
